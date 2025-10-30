@@ -6,6 +6,10 @@
     <title>نشر مقال جديد - أسهل حل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- كود AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+    
     <style>
         :root {
             --primary: #4361ee;
@@ -112,6 +116,23 @@
             font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+        
+        /* حاوية الإعلانات */
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            display: block;
         }
         
         /* حماية الدخول */
@@ -323,6 +344,10 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .ad-container {
+                padding: 0.5rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -354,6 +379,21 @@
 
     <!-- المحتوى الرئيسي -->
     <main>
+        <!-- إعلان أعلى الصفحة -->
+        <div class="ad-container">
+            <span class="ad-label">إعلان</span>
+            <!-- إعلان AdSense -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
         <section class="page-hero">
             <h1>نشر مقال جديد</h1>
             <p>شارك معرفتك وخبرتك مع مجتمعنا من خلال نشر مقال جديد</p>
@@ -386,6 +426,21 @@
                     <textarea class="form-textarea" id="articleContent" placeholder="اكتب محتوى المقال هنا..." required></textarea>
                 </div>
                 
+                <!-- إعلان داخل المحتوى -->
+                <div class="ad-container">
+                    <span class="ad-label">إعلان</span>
+                    <!-- إعلان AdSense -->
+                    <ins class="adsbygoogle"
+                         style="display:block; text-align:center;"
+                         data-ad-layout="in-article"
+                         data-ad-format="fluid"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="0987654321"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                
                 <div class="form-group">
                     <label class="form-label" for="articleDescription">وصف مختصر</label>
                     <textarea class="form-textarea" id="articleDescription" placeholder="اكتب وصفاً مختصراً للمقال..." required></textarea>
@@ -415,6 +470,21 @@
                 </div>
             </form>
         </section>
+        
+        <!-- إعلان أسفل الصفحة -->
+        <div class="ad-container">
+            <span class="ad-label">إعلان</span>
+            <!-- إعلان AdSense -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="5678901234"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </main>
 
     <script type="module">
