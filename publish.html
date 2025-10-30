@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشر مقال جديد - أسهل حل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* الترويسة */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        /* المحتوى الرئيسي */
+        main {
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .page-hero {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+        }
+        
+        .page-hero h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-hero p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* حماية الدخول */
+        .login-protection {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 400px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .login-form input {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .login-form button {
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* نموذج النشر */
+        .publish-form-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .badge-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .badge-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .badge-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .badge-option.new {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .badge-option.new.selected {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .badge-option.hot {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        
+        .badge-option.hot.selected {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .badge-option.news {
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        
+        .badge-option.news.selected {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .publish-form-container {
+                padding: 1.5rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .publish-form-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الترويسة -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-lightbulb"></i>
+                <span>أسهل حل</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="articles.html">المقالات</a></li>
+                <li><a href="publish.html" class="active">نشر مقال</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <section class="page-hero">
+            <h1>نشر مقال جديد</h1>
+            <p>شارك معرفتك وخبرتك مع مجتمعنا من خلال نشر مقال جديد</p>
+        </section>
+
+        <!-- حماية الدخول -->
+        <div id="loginSection" class="login-protection">
+            <h2>الدخول للنشر</h2>
+            <p>يجب إدخال كلمة المرور للوصول إلى صفحة النشر</p>
+            <form class="login-form" id="loginForm">
+                <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                <button type="submit">دخول</button>
+            </form>
+            <div id="loginError" class="message error" style="display: none;"></div>
+        </div>
+
+        <!-- نموذج النشر -->
+        <section id="publishSection" class="publish-form-container hidden">
+            <div class="message success" id="successMessage"></div>
+            <div class="message error" id="errorMessage"></div>
+            
+            <form class="publish-form" id="publishForm">
+                <div class="form-group">
+                    <label class="form-label" for="articleTitle">عنوان المقال</label>
+                    <input type="text" class="form-input" id="articleTitle" placeholder="أدخل عنوان المقال" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="articleContent">محتوى المقال</label>
+                    <textarea class="form-textarea" id="articleContent" placeholder="اكتب محتوى المقال هنا..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="articleDescription">وصف مختصر</label>
+                    <textarea class="form-textarea" id="articleDescription" placeholder="اكتب وصفاً مختصراً للمقال..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رابط وسائط</label>
+                    <input type="url" class="form-input" id="mediaUrl" placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">علامات التمييز</label>
+                    <div class="badge-options">
+                        <div class="badge-option new" data-badge="new">جديد</div>
+                        <div class="badge-option hot" data-badge="hot">مميز</div>
+                        <div class="badge-option news" data-badge="news">آخر خبر</div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> نشر المقال
+                    </button>
+                    <a href="articles.html" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> إلغاء
+                    </a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdoISOsfmCcgcIxN4MEaV-1UoJw5w6Cyw",
+            authDomain: "ashlhl.firebaseapp.com",
+            databaseURL: "https://ashlhl-default-rtdb.firebaseio.com",
+            projectId: "ashlhl",
+            storageBucket: "ashlhl.firebasestorage.app",
+            messagingSenderId: "430232058121",
+            appId: "1:430232058121:web:0ff23aa59dc88f06f63bd8",
+            measurementId: "G-FSSD2W414S"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // حماية الدخول
+        const loginSection = document.getElementById('loginSection');
+        const publishSection = document.getElementById('publishSection');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+
+        // التحقق إذا كان المستخدم قد سجل الدخول مسبقاً
+        if (localStorage.getItem('isAuthenticated') === 'true') {
+            loginSection.classList.add('hidden');
+            publishSection.classList.remove('hidden');
+        }
+
+        // معالجة تسجيل الدخول
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('loginPassword').value;
+            const correctPassword = 'sgad0780sgad';
+
+            if (password === correctPassword) {
+                localStorage.setItem('isAuthenticated', 'true');
+                loginSection.classList.add('hidden');
+                publishSection.classList.remove('hidden');
+            } else {
+                loginError.textContent = 'كلمة المرور غير صحيحة!';
+                loginError.style.display = 'block';
+            }
+        });
+
+        // اختيار علامات التمييز
+        document.querySelectorAll('.badge-option').forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+
+        // عرض الرسائل
+        function showMessage(message, type) {
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (type === 'success') {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            } else {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        // التحقق من النموذج وإرساله
+        document.getElementById('publishForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // جمع البيانات
+            const title = document.getElementById('articleTitle').value;
+            const content = document.getElementById('articleContent').value;
+            const description = document.getElementById('articleDescription').value;
+            const mediaUrl = document.getElementById('mediaUrl').value;
+            
+            // جمع علامات التمييز المختارة
+            const selectedBadges = [];
+            document.querySelectorAll('.badge-option.selected').forEach(badge => {
+                selectedBadges.push(badge.getAttribute('data-badge'));
+            });
+            
+            // تعطيل زر الإرسال
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري النشر...';
+            
+            try {
+                // حفظ البيانات في Realtime Database
+                const articlesRef = ref(db, 'articles');
+                await push(articlesRef, {
+                    title: title,
+                    content: content,
+                    description: description,
+                    mediaUrl: mediaUrl || '',
+                    badges: selectedBadges,
+                    createdAt: serverTimestamp(),
+                    views: 0
+                });
+                
+                console.log("تم نشر المقال بنجاح!");
+                showMessage('تم نشر المقال بنجاح!', 'success');
+                
+                // إعادة تعيين النموذج
+                this.reset();
+                
+                // إعادة تعيين علامات التمييز
+                document.querySelectorAll('.badge-option').forEach(badge => {
+                    badge.classList.remove('selected');
+                });
+                
+            } catch (error) {
+                console.error("حدث خطأ أثناء حفظ المقال: ", error);
+                showMessage('حدث خطأ أثناء حفظ المقال: ' + error.message, 'error');
+            } finally {
+                // إعادة تمكين زر الإرسال
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> نشر المقال';
+            }
+        });
+    </script>
+</body>
+</html>
