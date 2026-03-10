@@ -1,1 +1,148 @@
-s
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسهل حل - الرئيسية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <!-- شريط علوي مع زر القائمة -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">اسهل حل</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- بانر متحرك مع صور من Unsplash -->
+    <section class="hero-slider">
+        <div class="slider-wrapper">
+            <div class="slider" id="slider">
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="منصة اسهل حل"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="بناء متجرك الخاص"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="تعلم وتطور"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="تواصل فوري"></div>
+            </div>
+            <button class="slider-btn prev" id="prevBtn">❮</button>
+            <button class="slider-btn next" id="nextBtn">❯</button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- القائمة الجانبية (تظهر عند النقر على زر الهامبرغر) -->
+    <aside class="sidebar" id="sidebar">
+        <h3 class="sidebar-title">الأقسام الرئيسية</h3>
+        <ul class="sidebar-links">
+            <li><a href="/ar/store/">بناء متجري الخاص</a></li>
+            <li><a href="/ar/inventory/">المخزون</a></li>
+            <li><a href="/ar/chat/">الدردشة</a></li>
+            <li><a href="/ar/solutions/">حلول</a></li>
+            <li><a href="/ar/learn-english/">تعلم الإنجليزية</a></li>
+            <li><a href="/ar/news/">الأخبار</a></li>
+            <li><a href="/ar/stories/">القصص</a></li>
+            <li><a href="/ar/articles/">المقالات</a></li>
+            <li><a href="/ar/image-to-link/">صورة إلى رابط</a></li>
+            <li><a href="/ar/task-progress/">تقدم المهام</a></li>
+        </ul>
+        <h3 class="sidebar-title" style="margin-top: 1.5rem;">روابط مهمة</h3>
+        <ul class="sidebar-links">
+            <li><a href="/ar/contact/">اتصل بنا</a></li>
+            <li><a href="/ar/terms/">شروط الخدمة</a></li>
+            <li><a href="/ar/about/">من نحن</a></li>
+            <li><a href="/ar/privacy/">سياسة الخصوصية</a></li>
+            <li><a href="/ar/copyright/">حقوق الطبع والنشر</a></li>
+            <li><a href="/ar/faq/">الأسئلة الشائعة</a></li>
+            <li><a href="/ar/cookies/">سياسة الكوكيز</a></li>
+            <li><a href="/ar/sitemap/">خريطة الموقع</a></li>
+            <li><a href="/ar/feedback/">اقتراحات</a></li>
+        </ul>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- بطاقة ترحيب -->
+        <div class="welcome-card">
+            <h2>مرحباً بك في اسهل حل</h2>
+            <p>منصة متكاملة تقدم لك كل ما تحتاجه من خدمات وحلول مبتكرة. تصفح الأقسام المختلفة واكتشف ما يناسبك.</p>
+        </div>
+
+        <!-- بطاقات الأقسام مع صور من Unsplash (جميعها تعمل) -->
+        <h3 class="section-title">اختر ما يناسبك</h3>
+        <div class="cards-grid">
+            <a href="/ar/store/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="بناء متجر">
+                <h4>بناء متجري الخاص</h4>
+                <p>أنشئ متجرك الإلكتروني بسهولة</p>
+            </a>
+            <a href="/ar/inventory/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="مخزون">
+                <h4>المخزون</h4>
+                <p>إدارة المنتجات بسهولة</p>
+            </a>
+            <a href="/ar/chat/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="دردشة">
+                <h4>الدردشة</h4>
+                <p>تواصل مع الأصدقاء</p>
+            </a>
+            <a href="/ar/solutions/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="حلول">
+                <h4>حلول</h4>
+                <p>خدمات حصرية</p>
+            </a>
+            <a href="/ar/learn-english/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="تعلم الإنجليزية">
+                <h4>تعلم الإنجليزية</h4>
+                <p>دروس تفاعلية</p>
+            </a>
+            <a href="/ar/news/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="أخبار">
+                <h4>الأخبار</h4>
+                <p>آخر المستجدات</p>
+            </a>
+            <a href="/ar/stories/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="قصص">
+                <h4>القصص</h4>
+                <p>قصص وحكايات</p>
+            </a>
+            <a href="/ar/articles/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="مقالات">
+                <h4>المقالات</h4>
+                <p>قراءة مفيدة</p>
+            </a>
+            <a href="/ar/image-to-link/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="صورة إلى رابط">
+                <h4>صورة إلى رابط</h4>
+                <p>تحويل الصور لروابط</p>
+            </a>
+            <a href="/ar/task-progress/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="تقدم المهام">
+                <h4>تقدم المهام</h4>
+                <p>تابع إنجازاتك</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>جميع الحقوق محفوظة © <span id="current-year"></span> اسهل حل</p>
+        </div>
+    </footer>
+
+    <noscript>
+        <div class="noscript-message">
+            <p>جافاسكريبت معطل. الرجاء تفعيله للحصول على أفضل تجربة.</p>
+        </div>
+    </noscript>
+</body>
+</html>
