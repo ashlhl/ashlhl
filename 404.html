@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - ZIO3</title>
+    <style>
+        /* إعادة تعيين وإعدادات أساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #f5f7fa, #e9ecef, #dee2e6, #ced4da);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* أشكال خلفية فاتحة */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            background: rgba(173, 181, 189, 0.15);
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -150px;
+            background: rgba(173, 181, 189, 0.2);
+            animation-delay: -5s;
+        }
+
+        .shape3 {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(173, 181, 189, 0.25);
+            filter: blur(70px);
+            animation: pulse 8s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(15px); }
+            50% { transform: translateY(-30px) translateX(-10px); }
+            75% { transform: translateY(20px) translateX(20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* البطاقة الرئيسية - خلفية بيضاء شفافة قليلاً */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.7);
+            text-align: center;
+            color: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            transform: translateY(0);
+            animation: cardEnter 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* تصميم الرقم 404 */
+        .error-code {
+            font-size: 150px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2d3e50, #4a5c6e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: glitch 5s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: skew(0deg, 0deg); opacity: 1; }
+            95% { transform: skew(0deg, 0deg); opacity: 1; }
+            96% { transform: skew(5deg, 2deg) scale(1.02); opacity: 0.8; }
+            97% { transform: skew(-5deg, -2deg) scale(0.98); opacity: 0.9; }
+            98% { transform: skew(3deg, 1deg) scale(1.01); opacity: 0.85; }
+            99% { transform: skew(0deg, 0deg) scale(1); opacity: 1; }
+        }
+
+        /* أيقونة هندسية بديلة (بدون إيموجي) */
+        .graphic-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .graphic-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: none;
+            stroke: #2d3e50;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            animation: rotate 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        .graphic-icon .circle {
+            stroke-dasharray: 150;
+            stroke-dashoffset: 50;
+            animation: dash 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes dash {
+            from { stroke-dashoffset: 150; }
+            to { stroke-dashoffset: 30; }
+        }
+
+        /* النصوص */
+        .message {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1e293b;
+            letter-spacing: -0.02em;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* الزر بتصميم فاتح */
+        .home-btn {
+            display: inline-block;
+            padding: 14px 42px;
+            background: white;
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 60px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(45, 62, 80, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .home-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(45, 62, 80, 0.05), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .home-btn:hover {
+            background: #f8fafc;
+            border-color: #2d3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-btn:hover::before {
+            left: 100%;
+        }
+
+        /* رابط المساعدة */
+        .help-link {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .help-link a {
+            color: #2d3e50;
+            text-decoration: none;
+            border-bottom: 1px dashed #94a3b8;
+            transition: border-color 0.2s;
+        }
+
+        .help-link a:hover {
+            border-bottom-color: #2d3e50;
+        }
+
+        /* للغة العربية */
+        .container.arabic {
+            direction: rtl;
+        }
+
+        .container.arabic .home-btn {
+            letter-spacing: 0;
+        }
+
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 480px) {
+            .error-code { font-size: 100px; }
+            .message { font-size: 26px; }
+            .container { padding: 30px 20px; }
+            .graphic-icon svg { width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- أشكال خلفية فاتحة -->
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+
+    <div class="container" id="container">
+        <!-- أيقونة هندسية (بديل الإيموجي) -->
+        <div class="graphic-icon">
+            <svg viewBox="0 0 100 100">
+                <circle class="circle" cx="50" cy="50" r="35" stroke="currentColor" fill="none" />
+                <path d="M30 30 L70 70 M70 30 L30 70" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+        </div>
+
+        <div class="error-code">404</div>
+        <div class="message" id="message"></div>
+        <div class="description" id="description"></div>
+        <a href="#" class="home-btn" id="homeBtn"></a>
+        <div class="help-link" id="helpLink"></div>
+    </div>
+
+    <script>
+        (function() {
+            function getPreferredLanguage() {
+                const path = window.location.pathname;
+                if (path.startsWith('/ar/')) {
+                    return 'ar';
+                } else if (path.startsWith('/en/')) {
+                    return 'en';
+                }
+                const lang = navigator.language || navigator.userLanguage;
+                return lang.startsWith('ar') ? 'ar' : 'en';
+            }
+
+            const lang = getPreferredLanguage();
+
+            const texts = {
+                ar: {
+                    message: 'عذراً! الصفحة غير موجودة',
+                    description: 'لم نتمكن من العثور على الصفحة التي تبحث عنها. ربما تم نقلها أو حذفها.',
+                    homeBtn: 'العودة إلى الرئيسية',
+                    helpLink: 'يمكنك زيارة <a href="/ar">الصفحة الرئيسية</a> أو <a href="/ar/contact">الاتصال بنا</a>.'
+                },
+                en: {
+                    message: 'Oops! Page Not Found',
+                    description: 'We couldn\'t find the page you were looking for. It might have been moved or deleted.',
+                    homeBtn: 'Back to Home',
+                    helpLink: 'You can visit <a href="/en">our homepage</a> or <a href="/en/contact">contact us</a>.'
+                }
+            };
+
+            const t = texts[lang];
+
+            document.getElementById('message').textContent = t.message;
+            document.getElementById('description').textContent = t.description;
+            document.getElementById('homeBtn').textContent = t.homeBtn;
+            document.getElementById('helpLink').innerHTML = t.helpLink;
+
+            document.getElementById('homeBtn').href = lang === 'ar' ? '/ar/index/index.html' : '/en/index/index.html';
+
+            if (lang === 'ar') {
+                document.getElementById('container').classList.add('arabic');
+            }
+
+            document.documentElement.lang = lang;
+        })();
+    </script>
+
+    <noscript>
+        <div style="position:fixed; top:0; left:0; right:0; background:#ffffff; color:#1e293b; text-align:center; padding:20px; z-index:9999; border-bottom:1px solid #dee2e6;">
+            <p>JavaScript is disabled. Please <a href="/ar/index/index.html" style="color:#2d3e50;">visit Arabic homepage</a> or <a href="/en/index/index.html" style="color:#2d3e50;">English homepage</a>.</p>
+        </div>
+    </noscript>
+</body>
+</html>

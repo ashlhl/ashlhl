@@ -1,1 +1,43 @@
-سجاد 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ZIO3</title>
+    <style>body{display:none}</style> <!-- إخفاء المحتوى تماماً -->
+    <script>
+        // قائمة الدول العربية
+        const arabCountries = ['SA','EG','AE','KW','QA','BH','OM','YE','IQ','SY','LB','JO','PS','DZ','MA','TN','LY','MR','SD','SO','DJ','KM','EH'];
+        const q = window.location.search;
+
+        // التوجيه للعربية
+        function goAr() { window.location.replace('/ar/index/index.html' + q); }
+        // التوجيه للإنجليزية
+        function goEn() { window.location.replace('/en/index/index.html' + q); }
+
+        // التوجيه الاحتياطي حسب لغة المتصفح (سريع جداً)
+        function fallbackLang() {
+            (navigator.language || navigator.userLanguage).startsWith('ar') ? goAr() : goEn();
+        }
+
+        // محاولة كشف الدولة عبر ipapi.co (مهلة 2 ثانية)
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 2000);
+
+        fetch('https://ipapi.co/json/', { signal: controller.signal })
+            .then(r => r.json())
+            .then(data => {
+                clearTimeout(timeout);
+                arabCountries.includes(data.country_code) ? goAr() : goEn();
+            })
+            .catch(() => fallbackLang()); // أي خطأ → نستخدم لغة المتصفح
+
+        // تأمين إضافي: إذا لم يتم التوجيه بعد 2.5 ثانية، نستخدم لغة المتصفح
+        setTimeout(fallbackLang, 2500);
+    </script>
+</head>
+<body>
+    <!-- محتوى مخفي، لن يظهر أبداً لأننا سننتقل قبل أن يراه أحد -->
+    <h1>جاري التحويل...</h1>
+    <p>إذا لم يتم التحويل تلقائياً، <a href="/ar/index/index.html">اضغط هنا للعربية</a> | <a href="/en/index/index.html">English</a></p>
+</body>
+</html>
