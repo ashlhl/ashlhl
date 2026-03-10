@@ -265,12 +265,12 @@
 
         .message {
             max-width: 80%;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 16px 16px 16px 4px;
             align-self: flex-start;
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             position: relative;
             word-break: break-word;
         }
@@ -288,41 +288,60 @@
             background: #94a3b8;
             color: white;
             border-radius: 40px;
-            font-size: 0.6rem;
-            padding: 2px 10px;
+            font-size: 0.65rem;
+            padding: 3px 12px;
             border: none;
         }
 
         .message .username {
-            font-size: 0.5rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
             color: #4338ca;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
 
         .message.own .username { color: rgba(255,255,255,0.9); }
 
         .message .time {
-            font-size: 0.4rem;
+            font-size: 0.45rem;
             opacity: 0.6;
-            margin-top: 2px;
+            margin-top: 4px;
             text-align: left;
         }
 
+        /* تحسين عرض الوسائط */
         .message img, .message video, .message audio {
             max-width: 100%;
-            border-radius: 8px;
-            max-height: 100px;
+            border-radius: 12px;
+            max-height: 150px;
             cursor: pointer;
+            background: #000;
+            display: block;
+            margin: 4px 0;
         }
 
+        /* تخصيص مشغل الصوت */
+        .message audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 20px;
+            background: #f1f5f9;
+        }
+
+        /* تخصيص مشغل الفيديو */
+        .message video {
+            background: #000;
+            border-radius: 12px;
+        }
+
+        /* أزرار الحذف والرد */
         .delete-btn, .reply-btn {
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: #ef4444;
             color: white;
@@ -331,7 +350,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 1rem;
             opacity: 0;
             transition: 0.2s;
             z-index: 6;
@@ -344,9 +363,9 @@
         .message:hover .reply-btn { opacity: 1; }
 
         .typing-indicator {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: #475569;
-            padding: 2px 10px;
+            padding: 3px 12px;
             background: #ffffff;
             border-radius: 40px;
             align-self: flex-start;
@@ -369,17 +388,17 @@
         .input-area input {
             flex: 1;
             border: none;
-            padding: 6px 0;
+            padding: 8px 0;
             background: transparent;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             min-width: 0;
         }
 
         .input-area input:focus { outline: none; }
 
         .icon-btn {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #4f46e5;
             color: white;
@@ -391,15 +410,15 @@
             flex-shrink: 0;
         }
 
-        .icon-btn i { font-size: 1.1rem; }
+        .icon-btn i { font-size: 1.2rem; }
 
         .media-popup {
             position: absolute;
-            bottom: 50px;
+            bottom: 60px;
             left: 10px;
             background: rgba(255,255,255,0.95);
             border-radius: 40px;
-            padding: 4px;
+            padding: 6px;
             display: flex;
             gap: 4px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -413,11 +432,11 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 4px 8px;
-            font-size: 0.65rem;
+            padding: 6px 12px;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             cursor: pointer;
         }
         .media-popup .action-btn.camera { background: #10b981; }
@@ -426,12 +445,12 @@
         #file-input, #camera-input { display: none; }
 
         .progress-bar {
-            height: 3px;
+            height: 4px;
             background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
             display: none;
-            margin: 2px 0;
+            margin: 4px 0;
         }
         .progress-bar .fill {
             height: 100%;
@@ -442,14 +461,14 @@
 
         .toast {
             position: fixed;
-            top: 10px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: #1e293b;
             color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.7rem;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
             z-index: 9999;
             display: none;
             box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.2);
@@ -469,30 +488,33 @@
         .media-modal.active { display: flex; }
         .modal-media {
             max-width: 90%;
-            max-height: 70vh;
-            border-radius: 16px;
+            max-height: 75vh;
+            border-radius: 20px;
             border: 4px solid white;
         }
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 20px;
+            right: 20px;
             background: white;
             border: none;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            font-size: 1.3rem;
+            width: 36px;
+            height: 36px;
+            font-size: 1.5rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .back-btn {
-            margin-top: 10px;
+            margin-top: 16px;
             background: #4f46e5;
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 0.7rem;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.8rem;
             cursor: pointer;
         }
     </style>
@@ -555,7 +577,7 @@
     </div>
 
     <script type="module">
-        // ================== كامل كود الدردشة من النسخة السابقة مع الحفاظ على الوظائف ==================
+        // ================== كامل كود الدردشة مع إصلاحات عرض المستخدمين وتحسين الوسائط ==================
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set, push, onChildAdded, onDisconnect, get, remove, onValue, query, limitToLast, orderByChild } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -859,7 +881,7 @@
             }
         }
 
-        // عرض الرسالة
+        // عرض الرسالة (مع تحسين عرض الوسائط)
         function displayMessage(msg, isOwn, isSystem, msgId) {
             if (msgId && displayedMessages.has(msgId)) return;
             if (msgId) displayedMessages.add(msgId);
@@ -1001,6 +1023,7 @@
             }
         }
 
+        // تحديث قوائم المتصلين (إصلاح لعرض اسم المستخدم الحالي)
         function updateUsersLists(users) {
             const count = Object.keys(users).length;
             userCountSpan.textContent = `(${count})`;
@@ -1013,7 +1036,8 @@
                     item.className = 'user-item';
                     const nameSpan = document.createElement('span');
                     nameSpan.className = 'user-name';
-                    nameSpan.textContent = (user.name === ADMIN_LOGIN) ? ADMIN_DISPLAY : user.name;
+                    let displayName = (user.name === ADMIN_LOGIN) ? ADMIN_DISPLAY : user.name;
+                    nameSpan.textContent = displayName;
                     item.appendChild(nameSpan);
                     if (user.name === ADMIN_LOGIN) {
                         const adminIcon = document.createElement('i');
@@ -1021,6 +1045,16 @@
                         adminIcon.style.color = '#fbbf24';
                         adminIcon.textContent = 'verified';
                         item.appendChild(adminIcon);
+                    }
+                    // إضافة علامة "هذا أنت" للمستخدم الحالي
+                    if (key === userId) {
+                        const youIcon = document.createElement('i');
+                        youIcon.className = 'material-icons';
+                        youIcon.style.color = '#4f46e5';
+                        youIcon.style.fontSize = '1.2rem';
+                        youIcon.textContent = 'person';
+                        youIcon.title = 'هذا أنت';
+                        item.appendChild(youIcon);
                     }
                     if (isAdmin && key !== userId && user.name !== ADMIN_LOGIN) {
                         const kickIcon = document.createElement('button');
@@ -1085,6 +1119,7 @@
             userId = generateUserId();
 
             roomNameDisplay.textContent = `غرفة ${room}`;
+            // عرض اسم المستخدم الحالي بشكل صحيح
             userStatus.innerHTML = isAdmin ? 
                 `<i class="material-icons" style="font-size:0.9rem; vertical-align:middle;">verified</i> ${currentUser} (مدير)` : 
                 currentUser;
