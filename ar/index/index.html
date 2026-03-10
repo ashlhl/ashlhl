@@ -1,1 +1,697 @@
-d
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسهل حل - الرئيسية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d3e50;
+            --primary-dark: #1a2634;
+            --accent: #e67e22;
+            --light: #f8fafc;
+            --light-gray: #eef2f6;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(145deg, var(--light) 0%, var(--light-gray) 100%);
+            color: var(--text);
+            line-height: 1.4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-size: 14px; /* تصغير الخط الأساسي */
+        }
+
+        /* شريط علوي مصغر */
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.3rem 1rem; /* تقليل الحشوة */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            direction: rtl;
+        }
+
+        .logo-text {
+            font-size: 1.1rem; /* تصغير الشعار */
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        /* زر الهامبرغر أصغر */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 2.5px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        /* بانر متحرك أصغر حجماً */
+        .hero-slider {
+            max-width: 1100px;
+            margin: 0.8rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px -6px rgba(0,0,0,0.1);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev { left: 8px; }
+        .next { right: 8px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+            box-shadow: 0 0 5px var(--accent);
+        }
+
+        /* القائمة الجانبية أصغر */
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 54px; /* متناسق مع الشريط المصغر */
+            right: 8px;
+            width: 240px;
+            max-width: calc(100% - 16px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 0.8rem 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            max-height: 75vh;
+            overflow-y: auto;
+            direction: rtl;
+        }
+
+        .sidebar.active {
+            display: block;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin: 0.5rem 0 0.4rem;
+            color: var(--primary);
+            text-align: center;
+            border-bottom: 1.5px solid var(--accent);
+            padding-bottom: 0.2rem;
+        }
+
+        .sidebar-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .sidebar-links li a {
+            display: block;
+            padding: 0.3rem 0.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            text-align: center;
+            border-right: 3px solid transparent;
+        }
+
+        .sidebar-links li a:hover {
+            background: var(--white);
+            border-color: var(--accent);
+            border-right-color: var(--accent);
+            transform: translateX(-2px);
+            box-shadow: 0 3px 6px -3px rgba(230, 126, 34, 0.3);
+            color: var(--accent);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            max-width: 1100px;
+            margin: 0.8rem auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            padding: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px -4px var(--shadow);
+            margin-bottom: 0.9rem;
+            text-align: center;
+        }
+
+        .welcome-card h2 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .welcome-card p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 0.9rem 0 0.7rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 2.5px;
+            background: var(--accent);
+            margin: 0.2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* شبكة البطاقات - أكثر كثافة */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+            margin: 0.7rem 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 3px 8px -4px var(--shadow);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            background: var(--white);
+            box-shadow: 0 6px 12px -5px rgba(45, 62, 80, 0.15);
+            border-color: var(--accent);
+        }
+
+        .card img {
+            width: 100%;
+            height: 90px; /* تصغير الصور */
+            object-fit: cover;
+        }
+
+        .card h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin: 0.4rem 0.3rem 0.1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            font-size: 0.6rem;
+            color: var(--text-light);
+            margin: 0 0.3rem 0.5rem;
+        }
+
+        /* تذييل أصغر */
+        .footer {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.8);
+            margin-top: auto;
+            font-weight: 500;
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .footer span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .noscript-message {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--light);
+            color: var(--text);
+            text-align: center;
+            padding: 0.4rem;
+            border-top: 2px solid var(--accent);
+            z-index: 9999;
+            font-size: 0.7rem;
+        }
+
+        /* استجابة مع الحفاظ على التصغير */
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-slider {
+                margin: 0.5rem;
+            }
+            .welcome-card h2 {
+                font-size: 1rem;
+            }
+            .card img {
+                height: 75px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط علوي مع زر القائمة -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">اسهل حل</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- بانر متحرك مع صور من Unsplash -->
+    <section class="hero-slider">
+        <div class="slider-wrapper">
+            <div class="slider" id="slider">
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="منصة اسهل حل"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="بناء متجرك الخاص"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="تعلم وتطور"></div>
+                <div class="slide"><img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="تواصل فوري"></div>
+            </div>
+            <button class="slider-btn prev" id="prevBtn">❮</button>
+            <button class="slider-btn next" id="nextBtn">❯</button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- القائمة الجانبية (تظهر عند النقر على زر الهامبرغر) -->
+    <aside class="sidebar" id="sidebar">
+        <h3 class="sidebar-title">الأقسام الرئيسية</h3>
+        <ul class="sidebar-links">
+            <li><a href="/ar/store/">بناء متجري الخاص</a></li>
+            <li><a href="/ar/inventory/">المخزون</a></li>
+            <li><a href="/ar/chat/">الدردشة</a></li>
+            <li><a href="/ar/solutions/">حلول</a></li>
+            <li><a href="/ar/learn-english/">تعلم الإنجليزية</a></li>
+            <li><a href="/ar/news/">الأخبار</a></li>
+            <li><a href="/ar/stories/">القصص</a></li>
+            <li><a href="/ar/articles/">المقالات</a></li>
+            <li><a href="/ar/image-to-link/">صورة إلى رابط</a></li>
+            <li><a href="/ar/task-progress/">تقدم المهام</a></li>
+        </ul>
+        <h3 class="sidebar-title" style="margin-top: 1.2rem;">روابط مهمة</h3>
+        <ul class="sidebar-links">
+            <li><a href="/ar/contact/">اتصل بنا</a></li>
+            <li><a href="/ar/terms/">شروط الخدمة</a></li>
+            <li><a href="/ar/about/">من نحن</a></li>
+            <li><a href="/ar/privacy/">سياسة الخصوصية</a></li>
+            <li><a href="/ar/copyright/">حقوق الطبع والنشر</a></li>
+            <li><a href="/ar/faq/">الأسئلة الشائعة</a></li>
+            <li><a href="/ar/cookies/">سياسة الكوكيز</a></li>
+            <li><a href="/ar/sitemap/">خريطة الموقع</a></li>
+            <li><a href="/ar/feedback/">اقتراحات</a></li>
+        </ul>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- بطاقة ترحيب -->
+        <div class="welcome-card">
+            <h2>مرحباً بك في اسهل حل</h2>
+            <p>منصة متكاملة تقدم لك كل ما تحتاجه من خدمات وحلول مبتكرة. تصفح الأقسام المختلفة واكتشف ما يناسبك.</p>
+        </div>
+
+        <!-- بطاقات الأقسام مع صور من Unsplash (جميعها تعمل) -->
+        <h3 class="section-title">اختر ما يناسبك</h3>
+        <div class="cards-grid">
+            <a href="/ar/store/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="بناء متجر">
+                <h4>بناء متجري الخاص</h4>
+                <p>أنشئ متجرك الإلكتروني بسهولة</p>
+            </a>
+            <a href="/ar/inventory/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="مخزون">
+                <h4>المخزون</h4>
+                <p>إدارة المنتجات بسهولة</p>
+            </a>
+            <a href="/ar/chat/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="دردشة">
+                <h4>الدردشة</h4>
+                <p>تواصل مع الأصدقاء</p>
+            </a>
+            <a href="/ar/solutions/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="حلول">
+                <h4>حلول</h4>
+                <p>خدمات حصرية</p>
+            </a>
+            <a href="/ar/learn-english/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="تعلم الإنجليزية">
+                <h4>تعلم الإنجليزية</h4>
+                <p>دروس تفاعلية</p>
+            </a>
+            <a href="/ar/news/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="أخبار">
+                <h4>الأخبار</h4>
+                <p>آخر المستجدات</p>
+            </a>
+            <a href="/ar/stories/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="قصص">
+                <h4>القصص</h4>
+                <p>قصص وحكايات</p>
+            </a>
+            <a href="/ar/articles/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="مقالات">
+                <h4>المقالات</h4>
+                <p>قراءة مفيدة</p>
+            </a>
+            <a href="/ar/image-to-link/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="صورة إلى رابط">
+                <h4>صورة إلى رابط</h4>
+                <p>تحويل الصور لروابط</p>
+            </a>
+            <a href="/ar/task-progress/" class="card">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="تقدم المهام">
+                <h4>تقدم المهام</h4>
+                <p>تابع إنجازاتك</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>جميع الحقوق محفوظة © <span id="current-year"></span> اسهل حل</p>
+        </div>
+    </footer>
+
+    <noscript>
+        <div class="noscript-message">
+            <p>جافاسكريبت معطل. الرجاء تفعيله للحصول على أفضل تجربة.</p>
+        </div>
+    </noscript>
+
+    <!-- كود جافاسكريبت (نوع الوحدة) مع Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAG4EKrB3iLEV2hsB8b08ShpSO6PXDnGjg",
+          authDomain: "zio3-8ffdd.firebaseapp.com",
+          databaseURL: "https://zio3-8ffdd-default-rtdb.firebaseio.com",
+          projectId: "zio3-8ffdd",
+          storageBucket: "zio3-8ffdd.firebasestorage.app",
+          messagingSenderId: "560939348415",
+          appId: "1:560939348415:web:c854e9e214e498ad2d310a",
+          measurementId: "G-CVN2B2D0RD"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // شريط التمرير
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.dataset.index = i;
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateDots() {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+            updateDots();
+        }
+
+        function nextSlide() { goToSlide(currentIndex + 1); }
+        function prevSlide() { goToSlide(currentIndex - 1); }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        function stopAutoSlide() { clearInterval(slideInterval); }
+
+        prevBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
+        });
+
+        slider.addEventListener('mouseenter', stopAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
+
+        let touchStartX = 0;
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoSlide();
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            else if (touchEndX > touchStartX + 50) prevSlide();
+            startAutoSlide();
+        }, { passive: true });
+
+        startAutoSlide();
+
+        // القائمة الجانبية
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.sidebar-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Firebase
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('المستخدم مسجل الدخول:', user.email);
+                get(ref(database, `users/${user.uid}`)).then((snapshot) => {
+                    if (snapshot.exists()) console.log('بيانات المستخدم:', snapshot.val());
+                });
+            } else {
+                console.log('المستخدم غير مسجل الدخول');
+            }
+        });
+
+        logEvent(analytics, 'page_view', {
+            page_title: 'الرئيسية',
+            page_location: '/ar/index/'
+        });
+    </script>
+</body>
+</html>d
