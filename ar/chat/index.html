@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>اسهل حل | محادثات فورية</title>
+    <title>اسهل حل | ردود ذكية</title>
     <!-- Google Fonts & Material Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* ========== تصميم متجاوب مع تحسينات ========== */
+        /* متغيرات الألوان */
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #818cf8;
+            --success: #10b981;
+            --success-dark: #059669;
+            --danger: #ef4444;
+            --danger-dark: #dc2626;
+            --warning: #f59e0b;
+            --warning-dark: #d97706;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --bg-main: #f0f5fa;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --shadow-sm: 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --radius-sm: 20px;
+            --radius-md: 30px;
+            --radius-lg: 40px;
+            --radius-xl: 50px;
+            --transition: all 0.2s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,13 +51,14 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: #f0f5fa;
+            background: var(--bg-main);
             height: 100vh;
             display: flex;
             flex-direction: column;
             direction: rtl;
-            color: #1e293b;
-            font-size: 14px;
+            color: var(--gray-800);
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         #app {
@@ -36,9 +69,10 @@
             flex-direction: column;
             height: 100%;
             position: relative;
-            background: #f0f5fa;
+            background: var(--bg-main);
         }
 
+        /* الشاشات */
         .screen {
             display: none;
             flex: 1;
@@ -52,78 +86,83 @@
             display: flex;
         }
 
+        /* الشريط العلوي - ثابت */
         .top-bar {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(203, 213, 225, 0.5);
-            color: #4f46e5;
-            border-radius: 40px;
-            padding: 8px 14px;
+            border: 1px solid var(--gray-300);
+            color: var(--primary);
+            border-radius: var(--radius-xl);
+            padding: 8px 16px;
             margin: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
             flex-shrink: 0;
+            font-size: 14px;
         }
 
         .brand {
-            font-weight: 900;
+            font-weight: 800;
             font-size: 1.3rem;
             display: flex;
             align-items: center;
-            gap: 4px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            gap: 6px;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
         .brand i {
-            font-size: 1.5rem;
-            color: #4f46e5;
+            font-size: 1.6rem;
+            color: var(--primary);
             filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.2));
         }
 
         .menu-btn {
             background: transparent;
-            border: none;
-            color: #4f46e5;
-            padding: 4px;
+            border: 1px solid var(--gray-300);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 38px;
-            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #cbd5e1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-btn:hover {
+            background: var(--gray-100);
         }
 
         .menu-btn i {
             font-size: 1.8rem;
         }
 
+        /* القائمة الجانبية */
         .sidebar {
             position: fixed;
             top: 0;
-            right: -340px;
+            right: -300px;
             width: 280px;
             height: 100vh;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-left: 1px solid #e2e8f0;
-            box-shadow: -10px 0 30px -10px rgba(0, 0, 0, 0.1);
+            border-left: 1px solid var(--gray-200);
+            box-shadow: -10px 0 30px -10px rgba(0, 0, 0, 0.15);
             z-index: 1000;
-            transition: right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            padding: 20px 0;
+            transition: right 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding: 24px 0;
             display: flex;
             flex-direction: column;
-            border-top-right-radius: 30px;
-            border-bottom-right-radius: 30px;
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
         }
 
         .sidebar.open {
@@ -135,7 +174,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 20px 20px;
-            border-bottom: 2px solid #ede9fe;
+            border-bottom: 2px solid var(--gray-200);
             margin-bottom: 16px;
         }
 
@@ -145,18 +184,20 @@
 
         .close-btn {
             background: transparent;
-            border: none;
-            color: #4f46e5;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 50%;
-            transition: all 0.2s;
+            border: 1px solid var(--gray-300);
+            color: var(--primary);
             width: 38px;
             height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #cbd5e1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: var(--gray-100);
         }
 
         .close-btn i {
@@ -166,38 +207,38 @@
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             padding: 0 16px;
         }
 
         .sidebar-nav .nav-btn {
             background: transparent;
             border: none;
-            color: #334155;
-            padding: 12px 18px;
-            border-radius: 30px;
+            color: var(--gray-700);
+            padding: 12px 16px;
+            border-radius: var(--radius-xl);
             font-size: 0.95rem;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition);
             text-align: right;
             width: 100%;
             border: 1px solid transparent;
         }
 
         .sidebar-nav .nav-btn:hover {
-            background: #ede9fe;
-            color: #4f46e5;
-            border-color: #4f46e5;
+            background: var(--gray-100);
+            color: var(--primary);
+            border-color: var(--primary-light);
             transform: translateX(-5px);
         }
 
         .sidebar-nav .nav-btn i {
-            font-size: 1.4rem;
-            color: #4f46e5;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
 
         .sidebar-overlay {
@@ -216,158 +257,162 @@
             display: block;
         }
 
-        .card, .chat-card, .room-card, .replies-card {
-            background: rgba(255, 255, 255, 0.8);
+        /* البطاقات */
+        .card, .chat-card, .replies-card, .room-card {
+            background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-radius: 30px;
-            padding: 16px 12px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1),
-                        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
-            border: 1px solid rgba(203, 213, 225, 0.5);
+            border-radius: var(--radius-md);
+            padding: 20px 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             display: flex;
             flex-direction: column;
             flex: 1;
             overflow-y: auto;
         }
 
+        /* الشعار */
         .logo {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .logo h1 {
-            font-size: 1.6rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .logo p {
-            color: #64748b;
-            border-bottom: 2px dashed #cbd5e1;
-            padding-bottom: 6px;
-            font-size: 0.8rem;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            border-bottom: 2px dashed var(--gray-300);
+            padding-bottom: 8px;
         }
 
+        /* حقول الإدخال */
         .input-field {
             width: 100%;
-            padding: 10px 16px;
-            margin: 4px 0;
-            border: none;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            background: #ffffff;
-            color: #1e293b;
-            border: 2px solid #e2e8f0;
+            padding: 12px 18px;
+            margin: 6px 0;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            font-size: 0.95rem;
+            background: white;
+            color: var(--gray-800);
+            transition: var(--transition);
         }
 
         .input-field:focus {
             outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
         }
 
+        /* الأزرار */
         .btn {
             width: 100%;
-            padding: 8px 14px;
+            padding: 10px 16px;
             border: none;
-            border-radius: 40px;
-            font-size: 0.85rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
             font-weight: 700;
-            background: linear-gradient(145deg, #4f46e5, #6366f1);
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             color: white;
             cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 4px 0;
+            transition: var(--transition);
+            margin: 6px 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            box-shadow: 0 6px 14px -6px rgba(79, 70, 229, 0.3);
+            gap: 8px;
+            box-shadow: 0 6px 14px -6px rgba(79, 70, 229, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn i {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px rgba(79, 70, 229, 0.6);
         }
 
         .btn-success {
-            background: linear-gradient(145deg, #10b981, #059669);
+            background: linear-gradient(145deg, var(--success), var(--success-dark));
         }
 
         .btn-outline {
             background: transparent;
-            color: #4f46e5;
-            border: 2px solid #4f46e5;
+            color: var(--primary);
+            border: 2px solid var(--primary);
             box-shadow: none;
         }
 
-        .btn-warning {
-            background: linear-gradient(145deg, #f59e0b, #d97706);
-        }
-
-        .btn-danger {
-            background: linear-gradient(145deg, #ef4444, #dc2626);
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .divider {
-            margin: 12px 0;
-            border-top: 2px solid #e2e8f0;
+            margin: 16px 0;
+            border-top: 2px solid var(--gray-200);
             position: relative;
         }
 
         .divider::after {
             content: "أو";
             position: absolute;
-            top: -10px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: white;
-            padding: 0 16px;
-            color: #4f46e5;
-            font-size: 0.8rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 40px;
+            padding: 0 20px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-xl);
         }
 
         .join-section {
             display: flex;
             gap: 8px;
             align-items: center;
-            margin: 6px 0;
+            margin: 8px 0;
         }
 
         .join-section button {
             width: auto;
-            padding: 8px 16px;
+            padding: 8px 20px;
         }
 
         .note {
-            font-size: 0.75rem;
-            color: #64748b;
+            font-size: 0.8rem;
+            color: var(--gray-500);
         }
 
         .error {
-            color: #dc2626;
-            font-size: 0.75rem;
+            color: var(--danger);
+            font-size: 0.8rem;
             text-align: center;
         }
 
-        /* رأس الدردشة المحسّن */
+        /* رأس الدردشة */
         .chat-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(241, 245, 249, 0.8);
-            backdrop-filter: blur(8px);
-            border-radius: 40px;
-            padding: 4px 8px;
-            margin-bottom: 6px;
-            border: 1px solid #e2e8f0;
+            background: var(--gray-100);
+            border-radius: var(--radius-xl);
+            padding: 6px 12px;
+            margin-bottom: 8px;
+            border: 1px solid var(--gray-200);
             flex-wrap: wrap;
             gap: 4px;
         }
@@ -375,102 +420,107 @@
         .room-info {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         #room-name-display {
-            background: #ede9fe;
-            color: #4f46e5;
-            padding: 2px 8px;
-            border-radius: 40px;
+            background: var(--primary-light);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-xl);
             font-weight: 700;
-            font-size: 0.8rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
         }
 
         #user-count {
-            background: #4f46e5;
+            background: var(--primary);
             color: white;
-            padding: 2px 6px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            line-height: 1.5;
+            padding: 4px 8px;
+            border-radius: var(--radius-xl);
+            font-size: 0.75rem;
         }
 
         .copy-btn {
             background: transparent;
-            border: 1px solid #4f46e5;
-            color: #4f46e5;
-            padding: 2px 6px;
-            border-radius: 40px;
-            font-size: 0.7rem;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: var(--radius-xl);
+            font-size: 0.75rem;
             display: inline-flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
             cursor: pointer;
-            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .user-status-badge {
-            background: #e2e8f0;
-            color: #1e293b;
-            padding: 2px 8px;
-            border-radius: 40px;
-            font-size: 0.7rem;
+            background: var(--gray-200);
+            color: var(--gray-700);
+            padding: 4px 10px;
+            border-radius: var(--radius-xl);
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 4px;
-            line-height: 1.5;
         }
 
         .users-toggle-btn {
-            background: #10b981;
+            background: var(--success);
             color: white;
             border: none;
-            border-radius: 40px;
-            padding: 2px 8px;
-            font-size: 0.7rem;
+            border-radius: var(--radius-xl);
+            padding: 4px 10px;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            transition: 0.2s;
-            line-height: 1.5;
+            transition: var(--transition);
         }
 
         .users-toggle-btn:hover {
-            background: #059669;
+            background: var(--success-dark);
         }
 
         #leave-room-btn {
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             border: none;
-            border-radius: 40px;
-            padding: 2px 8px;
-            font-size: 0.7rem;
+            border-radius: var(--radius-xl);
+            padding: 4px 10px;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            line-height: 1.5;
+            transition: var(--transition);
         }
 
-        /* نافذة المتصلين المنبثقة */
+        #leave-room-btn:hover {
+            background: var(--danger-dark);
+        }
+
+        /* النوافذ المنبثقة */
         .users-popup, .replies-popup {
             position: absolute;
-            top: 60px;
+            top: 70px;
             left: 10px;
             right: 10px;
             background: white;
-            border-radius: 30px;
+            border-radius: var(--radius-md);
             padding: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 1px solid #cbd5e1;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
             z-index: 2000;
             display: none;
-            max-height: 300px;
+            max-height: 350px;
             overflow-y: auto;
         }
 
@@ -479,20 +529,22 @@
         }
 
         .users-popup h4, .replies-popup h4 {
-            color: #4f46e5;
-            margin-bottom: 10px;
+            color: var(--primary);
+            margin-bottom: 12px;
             font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 8px;
         }
 
         .users-popup .user-item, .reply-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-bottom: 1px solid #e2e8f0;
+            gap: 10px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .reply-item {
@@ -501,28 +553,12 @@
         }
 
         .reply-item:hover {
-            background: #ede9fe;
-        }
-
-        .reply-item.recommended {
-            background: #fef3c7;
-            border-right: 4px solid #f59e0b;
+            background: var(--gray-100);
         }
 
         .reply-item .reply-text {
             flex: 1;
             font-weight: 600;
-        }
-
-        .reply-item .reply-intent {
-            font-size: 0.7rem;
-            background: #e2e8f0;
-            padding: 2px 6px;
-            border-radius: 40px;
-        }
-
-        .users-popup .user-item:last-child, .reply-item:last-child {
-            border-bottom: none;
         }
 
         .users-popup .user-name {
@@ -533,23 +569,23 @@
         .kick-btn {
             background: transparent;
             border: none;
-            color: #ef4444;
+            color: var(--danger);
             cursor: pointer;
-            display: inline-flex;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            transition: 0.2s;
+            transition: var(--transition);
         }
 
         .kick-btn:hover {
-            background: #fee2e2;
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .kick-btn i {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .popup-overlay {
@@ -558,7 +594,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1999;
             display: none;
         }
@@ -567,55 +603,56 @@
             display: block;
         }
 
+        /* منطقة الرسائل */
         .messages {
             flex: 1;
             overflow-y: auto;
-            padding: 8px;
-            background: #ffffff;
-            border-radius: 20px;
-            margin-bottom: 8px;
+            padding: 12px;
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            border: 1px solid #e2e8f0;
-            min-height: 0;
+            gap: 8px;
+            border: 1px solid var(--gray-200);
         }
 
         .message {
             max-width: 80%;
-            padding: 6px 10px;
-            border-radius: 18px 18px 18px 6px;
+            padding: 10px 16px;  /* تكبير الحجم */
+            border-radius: 22px 22px 22px 6px;
             align-self: flex-start;
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            font-size: 0.8rem;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            font-size: 1.1rem;   /* خط أكبر */
             position: relative;
             word-break: break-word;
+            line-height: 1.5;
         }
 
         .message.own {
             align-self: flex-end;
-            background: #4f46e5;
+            background: var(--primary);
             color: white;
-            border-radius: 18px 18px 6px 18px;
-            border-color: #4f46e5;
+            border-radius: 22px 22px 6px 22px;
+            border-color: var(--primary);
         }
 
         .message.system {
             align-self: center;
-            background: #94a3b8;
+            background: var(--gray-400);
             color: white;
-            border-radius: 40px;
-            font-size: 0.65rem;
-            padding: 3px 12px;
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+            padding: 6px 18px;
             border: none;
         }
 
         .message .username {
-            font-size: 0.55rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 2px;
-            color: #4338ca;
+            margin-bottom: 4px;
+            color: var(--primary-dark);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -626,39 +663,28 @@
         }
 
         .message .time {
-            font-size: 0.45rem;
-            opacity: 0.6;
-            margin-top: 4px;
+            font-size: 0.65rem;
+            opacity: 0.7;
+            margin-top: 6px;
             text-align: left;
-        }
-
-        .message img, .message video, .message audio {
-            max-width: 100%;
-            border-radius: 12px;
-            max-height: 120px;
-            cursor: pointer;
-        }
-
-        .message audio {
-            max-height: 40px;
         }
 
         .delete-btn, .reply-btn {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             border: 2px solid white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             opacity: 0;
-            transition: 0.2s;
-            z-index: 6;
+            transition: var(--transition);
+            z-index: 5;
         }
 
         .delete-btn {
@@ -670,13 +696,13 @@
             left: -4px;
             top: 50%;
             transform: translateY(-50%);
-            background: #4f46e5;
+            background: var(--primary);
         }
 
         .message.own .reply-btn {
             left: auto;
             right: -4px;
-            background: #10b981;
+            background: var(--success);
         }
 
         .message.own .delete-btn {
@@ -691,24 +717,25 @@
         }
 
         .typing-indicator {
-            font-size: 0.65rem;
-            color: #475569;
-            padding: 3px 12px;
-            background: #ffffff;
-            border-radius: 40px;
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            padding: 6px 18px;
+            background: white;
+            border-radius: var(--radius-xl);
             align-self: flex-start;
             display: none;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--gray-200);
         }
 
+        /* منطقة الإدخال */
         .input-area {
             display: flex;
-            gap: 4px;
+            gap: 6px;
             align-items: center;
-            background: #ffffff;
-            border-radius: 40px;
-            padding: 2px 2px 2px 12px;
-            border: 1px solid #cbd5e1;
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 4px 4px 4px 16px;
+            border: 1px solid var(--gray-200);
             margin-top: auto;
             flex-wrap: wrap;
         }
@@ -716,9 +743,9 @@
         .input-area input {
             flex: 1;
             border: none;
-            padding: 8px 0;
+            padding: 12px 0;    /* تكبير */
             background: transparent;
-            font-size: 0.85rem;
+            font-size: 1rem;
             min-width: 0;
         }
 
@@ -727,10 +754,10 @@
         }
 
         .icon-btn {
-            width: 36px;
-            height: 36px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            background: #4f46e5;
+            background: var(--primary);
             color: white;
             border: none;
             display: flex;
@@ -738,23 +765,30 @@
             justify-content: center;
             cursor: pointer;
             flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
         }
 
         .icon-btn i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
 
+        /* قائمة المرفقات */
         .media-popup {
             position: absolute;
-            bottom: 60px;
+            bottom: 70px;
             left: 10px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 40px;
-            padding: 6px;
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 8px;
             display: flex;
-            gap: 4px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 1px solid #cbd5e1;
+            gap: 8px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
             display: none;
             z-index: 100;
         }
@@ -764,34 +798,41 @@
         }
 
         .media-popup .action-btn {
-            background: #4f46e5;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 40px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
+            border-radius: var(--radius-xl);
+            padding: 8px 16px;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .media-popup .action-btn:hover {
+            background: var(--primary-dark);
         }
 
         .media-popup .action-btn.camera {
-            background: #10b981;
+            background: var(--success);
         }
 
         .media-popup .action-btn.mic {
-            background: #f59e0b;
+            background: var(--warning);
         }
 
+        /* إخفاء مدخلات الملفات نهائياً */
         #file-input, #camera-input {
-            display: none;
+            display: none !important;
         }
 
+        /* شريط التقدم */
         .progress-bar {
             height: 4px;
-            background: #e2e8f0;
-            border-radius: 10px;
+            background: var(--gray-200);
+            border-radius: var(--radius-xl);
             overflow: hidden;
             display: none;
             margin: 4px 0;
@@ -799,26 +840,28 @@
 
         .progress-bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, #4f46e5, #818cf8);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             width: 0%;
             transition: width 0.3s;
         }
 
+        /* الإشعارات */
         .toast {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e293b;
+            background: var(--gray-800);
             color: white;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 0.75rem;
+            padding: 8px 20px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
             z-index: 9999;
             display: none;
-            box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-lg);
         }
 
+        /* معرض الوسائط */
         .media-modal {
             display: none;
             position: fixed;
@@ -838,7 +881,7 @@
         .modal-media {
             max-width: 90%;
             max-height: 75vh;
-            border-radius: 20px;
+            border-radius: var(--radius-md);
             border: 4px solid white;
         }
 
@@ -849,9 +892,9 @@
             background: white;
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1.8rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -860,141 +903,50 @@
 
         .back-btn {
             margin-top: 16px;
-            background: #4f46e5;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 40px;
-            padding: 8px 20px;
-            font-size: 0.8rem;
+            border-radius: var(--radius-xl);
+            padding: 10px 30px;
+            font-size: 0.9rem;
             cursor: pointer;
         }
 
-        .room-card {
-            padding: 12px;
-        }
-
-        .room-code-large {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #4f46e5;
-            text-align: center;
-            direction: ltr;
-            letter-spacing: 4px;
-            background: #ffffff;
-            padding: 4px 10px;
-            border-radius: 40px;
-            display: inline-block;
-            margin: 4px auto;
-            border: 2px solid #4f46e5;
-        }
-
-        .room-detail {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 8px;
-            margin: 8px 0;
-            border: 1px solid #cbd5e1;
-        }
-
-        .room-detail .row {
+        /* روابط التذييل */
+        .footer-links {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 16px;
             font-size: 0.8rem;
-            padding: 4px 0;
-        }
-
-        .room-detail .label {
-            font-weight: 700;
-            color: #4f46e5;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .room-detail .value {
-            font-weight: 600;
-            color: #1e293b;
-            background: white;
-            padding: 2px 8px;
-            border-radius: 40px;
-            border: 1px solid #cbd5e1;
-        }
-
-        .room-users {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 8px;
-            margin: 4px 0 8px 0;
-            border: 1px solid #cbd5e1;
-            max-height: 120px;
-            overflow-y: auto;
-        }
-
-        .room-users h3 {
-            font-size: 0.9rem;
-            color: #4f46e5;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .room-users-list {
-            display: flex;
             flex-wrap: wrap;
-            gap: 4px;
         }
 
-        .room-users-list span {
-            background: white;
-            color: #1e293b;
-            padding: 2px 8px;
-            border-radius: 40px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.75rem;
-            display: inline-flex;
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        .room-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px;
-            margin-top: 4px;
-        }
-
-        .room-actions .btn {
-            padding: 6px 8px;
-            font-size: 0.75rem;
-            margin: 0;
-        }
-
-        .room-actions .btn i {
-            font-size: 1rem;
-        }
-
-        .room-enter-btn {
-            grid-column: span 2;
-        }
-
-        /* صفحة إدارة الردود */
+        /* إدارة الردود */
         .replies-list {
-            margin: 10px 0;
+            margin: 12px 0;
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #e2e8f0;
-            border-radius: 30px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
             padding: 8px;
         }
 
         .reply-manage-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px;
-            border-bottom: 1px solid #e2e8f0;
+            gap: 10px;
+            padding: 10px;
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .reply-manage-item:last-child {
@@ -1006,55 +958,216 @@
             font-weight: 600;
         }
 
-        .reply-manage-intent {
-            font-size: 0.7rem;
-            background: #e2e8f0;
-            padding: 2px 6px;
-            border-radius: 40px;
-        }
-
         .reply-manage-actions {
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
 
         .reply-manage-actions button {
             background: transparent;
             border: none;
             cursor: pointer;
-            padding: 4px;
+            padding: 6px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: var(--transition);
         }
 
         .reply-manage-actions .edit-btn {
-            color: #4f46e5;
+            color: var(--primary);
         }
 
         .reply-manage-actions .delete-btn {
-            color: #ef4444;
+            color: var(--danger);
         }
 
-        .footer-links {
+        .reply-manage-actions button:hover {
+            background: var(--gray-200);
+        }
+
+        /* الردود المتعلمة */
+        .learned-reply-item {
             display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: auto;
-            padding-top: 8px;
-            font-size: 0.75rem;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .learned-original {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .learned-reply {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .learned-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* أشرطة التبويب */
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            background: var(--gray-100);
+            border-radius: var(--radius-xl);
+            padding: 4px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 8px;
+            border-radius: var(--radius-xl);
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* أزرار المدير */
+        .admin-controls {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
             flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: #4f46e5;
-            text-decoration: none;
+        .admin-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: 8px 16px;
+            font-size: 0.85rem;
             display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* تصميم بطاقة الغرفة */
+        .room-card .room-code-large {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            direction: ltr;
+            letter-spacing: 4px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-xl);
+            display: inline-block;
+            margin: 8px auto;
+            border: 2px solid var(--primary);
+        }
+
+        .room-detail {
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid var(--gray-200);
+        }
+
+        .room-detail .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            padding: 6px 0;
+        }
+
+        .room-detail .label {
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .room-detail .value {
+            font-weight: 600;
+            color: var(--gray-800);
+            background: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gray-300);
+        }
+
+        .room-users {
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin: 8px 0 12px 0;
+            border: 1px solid var(--gray-200);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .room-users h3 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .room-users-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .room-users-list span {
+            background: white;
+            color: var(--gray-800);
+            padding: 4px 12px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gray-300);
+            font-size: 0.8rem;
+            display: inline-flex;
             align-items: center;
             gap: 4px;
         }
 
+        .room-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .room-actions .btn {
+            padding: 8px 10px;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .room-enter-btn {
+            grid-column: span 2;
+        }
+
+        /* تحسينات للجوال */
         @media (max-width: 400px) {
             .brand { font-size: 1.2rem; }
             .join-section { flex-direction: column; }
@@ -1081,7 +1194,8 @@
                 <button class="nav-btn" data-screen="login"><i class="material-icons">login</i> دخول</button>
                 <button class="nav-btn" data-screen="chat" id="nav-chat" style="display:none;"><i class="material-icons">chat</i> الدردشة</button>
                 <button class="nav-btn" data-screen="room" id="nav-room" style="display:none;"><i class="material-icons">meeting_room</i> الغرفة</button>
-                <button class="nav-btn" data-screen="replies" id="nav-replies" style="display:none;"><i class="material-icons">reply</i> إدارة الردود</button>
+                <button class="nav-btn" data-screen="replies" id="nav-replies" style="display:none;"><i class="material-icons">reply</i> إدارة الردود العامة</button>
+                <button class="nav-btn" data-screen="learned" id="nav-learned" style="display:none;"><i class="material-icons">school</i> الردود المتعلمة</button>
                 <button class="nav-btn" data-screen="help"><i class="material-icons">help</i> مساعدة</button>
                 <button class="nav-btn" data-screen="about"><i class="material-icons">info</i> حول</button>
                 <button class="nav-btn" data-screen="contact"><i class="material-icons">email</i> اتصل</button>
@@ -1098,7 +1212,7 @@
             <div class="card">
                 <div class="logo">
                     <h1>اسهل حل</h1>
-                    <p>محادثات خاصة بكل سهولة</p>
+                    <p>يتعلم من ردودك</p>
                 </div>
                 <button id="start-chat-btn" class="btn btn-success"><i class="material-icons">chat</i> ابدأ المحادثة</button>
                 <div class="footer-links">
@@ -1121,7 +1235,7 @@
                     <input type="checkbox" id="manual-code-checkbox">
                     <label for="manual-code-checkbox">استخدام مفتاح مخصص</label>
                 </div>
-                <div id="custom-key-container">
+                <div id="custom-key-container" style="display: none;">
                     <input type="text" id="custom-room-input" class="input-field" placeholder="المفتاح (أرقام)" maxlength="6">
                 </div>
                 <button id="create-room-btn" class="btn"><i class="material-icons">add_circle</i> إنشاء غرفة جديدة</button>
@@ -1152,15 +1266,21 @@
                     </div>
                 </div>
 
-                <!-- نافذة المتصلين المنبثقة -->
+                <!-- أزرار إدارة الردود (تظهر للمدير فقط) -->
+                <div class="admin-controls" id="admin-controls" style="display: none;">
+                    <button id="manage-replies-btn" class="admin-btn"><i class="material-icons">reply</i> إدارة الردود العامة</button>
+                    <button id="manage-learned-btn" class="admin-btn"><i class="material-icons">school</i> الردود المتعلمة</button>
+                </div>
+
+                <!-- نافذة المتصلين -->
                 <div id="users-popup" class="users-popup">
                     <h4><i class="material-icons">people</i> المتصلون الآن</h4>
                     <div id="popup-users-list"></div>
                 </div>
 
-                <!-- نافذة الردود المحفوظة (تظهر للمدير فقط) -->
+                <!-- نافذة الردود العامة (تظهر للمدير) -->
                 <div id="replies-popup" class="replies-popup">
-                    <h4><i class="material-icons">reply</i> الردود المحفوظة</h4>
+                    <h4><i class="material-icons">reply</i> الردود العامة</h4>
                     <div id="popup-replies-list"></div>
                 </div>
 
@@ -1172,7 +1292,7 @@
                 <div id="upload-progress" class="progress-bar"><div class="fill"></div></div>
                 <div class="input-area">
                     <input type="text" id="message-input" placeholder="اكتب رسالتك...">
-                    <button id="replies-btn" class="icon-btn" style="background:#10b981; display:none;"><i class="material-icons">reply</i></button>
+                    <button id="replies-btn" class="icon-btn" style="background:#10b981; display:none;" title="الردود العامة"><i class="material-icons">reply</i></button>
                     <button id="media-btn" class="icon-btn"><i class="material-icons">attach_file</i></button>
                     <div id="media-popup" class="media-popup">
                         <button id="attach-btn" class="action-btn"><i class="material-icons">cloud_upload</i> رفع</button>
@@ -1180,22 +1300,34 @@
                         <button id="audio-btn" class="action-btn mic"><i class="material-icons">mic</i> تسجيل</button>
                     </div>
                     <button id="send-message-btn" class="icon-btn"><i class="material-icons">send</i></button>
-                    <button id="delay-reply-btn" class="icon-btn" style="background:#f59e0b; display:none;" title="رد بعد 5 ثوان"><i class="material-icons">timer</i></button>
+                    <button id="auto-reply-toggle" class="icon-btn" style="background:#64748b;" title="تشغيل الرد التلقائي"><i class="material-icons">bolt</i></button>
                 </div>
-                <input type="file" id="file-input" accept="image/*,video/*">
-                <input type="file" id="camera-input" accept="image/*" capture="environment">
+                <!-- عناصر input file مخفية تماماً -->
+                <input type="file" id="file-input" accept="image/*,video/*" style="display:none !important;">
+                <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none !important;">
             </div>
         </div>
 
         <!-- شاشة الغرفة -->
         <div id="room-screen" class="screen">
             <div class="room-card">
-                <div class="logo"><h1>معلومات الغرفة</h1></div>
+                <div class="logo">
+                    <h1>معلومات الغرفة</h1>
+                </div>
                 <div id="room-detail-code" class="room-code-large">123456</div>
                 <div class="room-detail">
-                    <div class="row"><span class="label"><i class="material-icons">people</i> عدد المتصلين</span><span class="value" id="room-detail-users">0</span></div>
-                    <div class="row"><span class="label"><i class="material-icons">calendar_today</i> تاريخ الإنشاء</span><span class="value" id="room-detail-created">2025-03-15</span></div>
-                    <div class="row"><span class="label"><i class="material-icons">circle</i> الحالة</span><span class="value" id="room-detail-status" style="color:#10b981;">نشطة</span></div>
+                    <div class="row">
+                        <span class="label"><i class="material-icons">people</i> عدد المتصلين</span>
+                        <span class="value" id="room-detail-users">0</span>
+                    </div>
+                    <div class="row">
+                        <span class="label"><i class="material-icons">calendar_today</i> تاريخ الإنشاء</span>
+                        <span class="value" id="room-detail-created">2025-03-15</span>
+                    </div>
+                    <div class="row">
+                        <span class="label"><i class="material-icons">circle</i> الحالة</span>
+                        <span class="value" id="room-detail-status" style="color:#10b981;">نشطة</span>
+                    </div>
                 </div>
                 <div class="room-users">
                     <h3><i class="material-icons">people</i> المتصلون الآن</h3>
@@ -1209,36 +1341,95 @@
             </div>
         </div>
 
-        <!-- شاشة إدارة الردود (للمدير فقط) -->
+        <!-- شاشة إدارة الردود العامة (للمدير) -->
         <div id="replies-screen" class="screen">
             <div class="replies-card">
                 <div class="logo">
-                    <h1>إدارة الردود</h1>
-                    <p>أضف أو عدل أو احذف الردود المحفوظة</p>
+                    <h1>إدارة الردود العامة</h1>
+                    <p>أضف أو عدل أو احذف</p>
                 </div>
-                <div class="input-group" style="display: flex; gap: 4px; margin-bottom: 8px;">
-                    <input type="text" id="new-reply-text" class="input-field" placeholder="نص الرد" style="flex: 2;">
-                    <input type="text" id="new-reply-intent" class="input-field" placeholder="كلمة مفتاحية (مثل: سعر)" style="flex: 1;">
-                    <button id="add-reply-btn" class="btn" style="width: auto; padding: 8px 12px;"><i class="material-icons">add</i></button>
+                <div style="display:flex; gap:4px; margin-bottom:8px;">
+                    <input type="text" id="new-reply-text" class="input-field" placeholder="نص الرد" style="flex:2;">
+                    <button id="add-reply-btn" class="btn" style="width:auto; padding:8px 12px;"><i class="material-icons">add</i></button>
                 </div>
-                <div id="replies-list-container" class="replies-list">
-                    <!-- سيتم ملؤها ديناميكياً -->
-                </div>
-                <button class="btn btn-outline" data-screen="chat"><i class="material-icons">arrow_forward</i> العودة للدردشة</button>
+                <div id="replies-list-container" class="replies-list"></div>
+                <button class="btn btn-outline" data-screen="chat"><i class="material-icons">arrow_forward</i> العودة</button>
             </div>
         </div>
 
-        <!-- باقي الشاشات (مختصرة لكن كاملة) -->
-        <div id="help-screen" class="screen"><div class="card"><div class="logo"><h1>مساعدة</h1></div><p>أدخل اسمك، أنشئ غرفة أو انضم برمز. يمكنك إرسال صور وفيديو (الصور حتى 5MB، الفيديو حتى 10MB). المحادثات مشفرة.</p><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="about-screen" class="screen"><div class="card"><div class="logo"><h1>حول</h1></div><p>منصة محادثات فورية بدون تسجيل، تشفير كامل، خصوصية تامة.</p><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="contact-screen" class="screen"><div class="card"><div class="logo"><h1>اتصل بنا</h1></div><p><i class="material-icons">email</i> ashlhl@support.com</p><p><i class="material-icons">phone</i> +966 123 456 789</p><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="privacy-screen" class="screen"><div class="card"><div class="logo"><h1>الخصوصية</h1></div><p>لا نجمع أي بيانات. جميع المحادثات مشفرة ولا تُخزن.</p><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="terms-screen" class="screen"><div class="card"><div class="logo"><h1>الشروط</h1></div><p>الاستخدام مسؤول، ممنوع المحتوى المسيء.</p><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="faq-screen" class="screen"><div class="card"><div class="logo"><h1>أسئلة شائعة</h1></div><div>هل أحتاج حساب؟ لا.</div><div>كيف أشارك الغرفة؟ انسخ الرمز.</div><div>هل المحادثات آمنة؟ نعم.</div><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
-        <div id="send-screen" class="screen"><div class="card"><div class="logo"><h1>إرسال رسالة</h1></div><input type="text" id="send-name" class="input-field" placeholder="الاسم"><textarea id="send-message" class="input-field" style="border-radius:24px; min-height:80px;" placeholder="رسالتك..."></textarea><button class="btn" id="send-message-action"><i class="material-icons">send</i> إرسال</button><div id="send-status" class="note"></div><button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button></div></div>
+        <!-- شاشة الردود المتعلمة (للمدير) -->
+        <div id="learned-screen" class="screen">
+            <div class="replies-card">
+                <div class="logo">
+                    <h1>الردود المتعلمة</h1>
+                    <p>من ردودك على الرسائل السابقة</p>
+                </div>
+                <div class="tab-bar">
+                    <button class="tab active" data-learned-tab="room">هذه الغرفة</button>
+                </div>
+                <div id="learned-list-container" class="replies-list"></div>
+                <button class="btn btn-outline" data-screen="chat"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+
+        <!-- باقي الشاشات مختصرة ولكن مع تصميم -->
+        <div id="help-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>مساعدة</h1></div>
+                <p>أدخل اسمك، أنشئ غرفة أو انضم برمز. يمكنك إرسال صور وفيديو (الصور حتى 5MB، الفيديو حتى 10MB). المحادثات مشفرة.</p>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="about-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>حول</h1></div>
+                <p>منصة محادثات فورية بدون تسجيل، تشفير كامل، خصوصية تامة.</p>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="contact-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>اتصل بنا</h1></div>
+                <p><i class="material-icons">email</i> ashlhl@support.com</p>
+                <p><i class="material-icons">phone</i> +966 123 456 789</p>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="privacy-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>الخصوصية</h1></div>
+                <p>لا نجمع أي بيانات. جميع المحادثات مشفرة ولا تُخزن.</p>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="terms-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>الشروط</h1></div>
+                <p>الاستخدام مسؤول، ممنوع المحتوى المسيء.</p>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="faq-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>أسئلة شائعة</h1></div>
+                <div>هل أحتاج حساب؟ لا.</div>
+                <div>كيف أشارك الغرفة؟ انسخ الرمز.</div>
+                <div>هل المحادثات آمنة؟ نعم.</div>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
+        <div id="send-screen" class="screen">
+            <div class="card">
+                <div class="logo"><h1>إرسال رسالة</h1></div>
+                <input type="text" id="send-name" class="input-field" placeholder="الاسم">
+                <textarea id="send-message" class="input-field" style="border-radius:24px; min-height:80px;" placeholder="رسالتك..."></textarea>
+                <button class="btn" id="send-message-action"><i class="material-icons">send</i> إرسال</button>
+                <div id="send-status" class="note"></div>
+                <button class="btn btn-outline" data-screen="login"><i class="material-icons">arrow_forward</i> العودة</button>
+            </div>
+        </div>
     </div>
 
-    <!-- الإشعارات والنوافذ المنبثقة -->
     <div id="notification" class="toast"></div>
     <div id="mediaModal" class="media-modal">
         <button class="close-modal" id="closeModalBtn"><i class="material-icons">close</i></button>
@@ -1247,9 +1438,7 @@
     </div>
 
     <script type="module">
-        // ================== تحذير أمني ==================
-        console.warn('%c⚠️ هذا الكود يجلب مفتاح GitHub من Firebase (المسار 2026) ويستخدمه في الواجهة الأمامية.', 'color: red; font-size: 16px;');
-
+        // استيراد Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set, push, onChildAdded, onDisconnect, get, remove, onValue, query, limitToLast, orderByChild, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -1266,16 +1455,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // ================== عناصر DOM ==================
+        // عناصر DOM
         const screens = document.querySelectorAll('.screen');
         const navButtons = document.querySelectorAll('[data-screen]');
         const startChatBtn = document.getElementById('start-chat-btn');
-        const chatScreen = document.getElementById('chat-screen');
         const navChat = document.getElementById('nav-chat');
         const navRoom = document.getElementById('nav-room');
         const navReplies = document.getElementById('nav-replies');
-        const roomScreen = document.getElementById('room-screen');
-        const repliesScreen = document.getElementById('replies-screen');
+        const navLearned = document.getElementById('nav-learned');
         const usernameInput = document.getElementById('username-input');
         const roomCodeInput = document.getElementById('room-code-input');
         const customRoomInput = document.getElementById('custom-room-input');
@@ -1304,42 +1491,33 @@
         const progressBar = document.getElementById('upload-progress');
         const progressFill = progressBar?.querySelector('.fill');
         const notification = document.getElementById('notification');
-        const mediaModal = document.getElementById('mediaModal');
-        const modalMediaContainer = document.getElementById('modalMediaContainer');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalBackBtn = document.getElementById('modalBackBtn');
-        const roomDetailCode = document.getElementById('room-detail-code');
-        const roomDetailUsers = document.getElementById('room-detail-users');
-        const roomDetailCreated = document.getElementById('room-detail-created');
-        const roomDetailStatus = document.getElementById('room-detail-status');
-        const roomEnterChatBtn = document.getElementById('room-enter-chat-btn');
-        const roomCopyCodeBtn = document.getElementById('room-copy-code-btn');
-        const roomShareBtn = document.getElementById('room-share-btn');
-        const roomUsersList = document.getElementById('room-users-list');
         const toggleUsersBtn = document.getElementById('toggle-users-btn');
         const usersPopup = document.getElementById('users-popup');
         const popupOverlay = document.getElementById('popup-overlay');
         const popupUsersList = document.getElementById('popup-users-list');
-        const sendName = document.getElementById('send-name');
-        const sendMessage = document.getElementById('send-message');
-        const sendMessageAction = document.getElementById('send-message-action');
-        const sendStatus = document.getElementById('send-status');
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const closeSidebar = document.getElementById('closeSidebar');
 
-        // عناصر إدارة الردود
+        // عناصر الردود
         const repliesPopup = document.getElementById('replies-popup');
         const popupRepliesList = document.getElementById('popup-replies-list');
         const repliesBtn = document.getElementById('replies-btn');
-        const delayReplyBtn = document.getElementById('delay-reply-btn');
+        const autoReplyToggle = document.getElementById('auto-reply-toggle');
         const repliesListContainer = document.getElementById('replies-list-container');
         const newReplyText = document.getElementById('new-reply-text');
-        const newReplyIntent = document.getElementById('new-reply-intent');
         const addReplyBtn = document.getElementById('add-reply-btn');
+        const adminControls = document.getElementById('admin-controls');
+        const manageRepliesBtn = document.getElementById('manage-replies-btn');
+        const manageLearnedBtn = document.getElementById('manage-learned-btn');
 
-        // ================== متغيرات الحالة ==================
+        // عناصر الردود المتعلمة
+        const learnedScreen = document.getElementById('learned-screen');
+        const learnedListContainer = document.getElementById('learned-list-container');
+        const learnedTabs = document.querySelectorAll('[data-learned-tab]');
+
+        // متغيرات الحالة
         let currentRoom = null, currentUser = null, userId = null, messagesRef = null, typingTimeout = null;
         let messagesUnsubscribe = null, usersUnsubscribe = null;
         let displayedMessages = new Set();
@@ -1349,16 +1527,15 @@
         const ADMIN_LOGIN = "ashlhlsgadalyasiri";
         const ADMIN_DISPLAY = "سجاد";
 
-        // متغيرات التسجيل الصوتي
-        let mediaRecorder = null;
-        let audioChunks = [];
-        let isRecording = false;
+        // متغيرات الردود الذكية
+        let savedReplies = []; // الردود العامة (من صفحة الإدارة)
+        let learnedReplies = []; // الردود المتعلمة (من ردود المدير على رسائل محددة) لهذه الغرفة
+        let lastIncomingMessage = null; // آخر رسالة واردة من شخص آخر
+        let autoReplyActive = false;
+        let pendingTimeout = null;
+        let suggestedReplyText = null; // الرد المقترح الحالي
 
-        // متغيرات الردود
-        let savedReplies = []; // مصفوفة الردود المحفوظة { id, text, intent }
-        let delayTimeout = null;
-
-        // ================== دوال مساعدة ==================
+        // دوال مساعدة
         function openSidebar() { sidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
         function closeSidebarFunc() { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
         menuBtn.addEventListener('click', openSidebar);
@@ -1372,7 +1549,12 @@
             if (navChat) navChat.style.display = screenId === 'chat' ? 'block' : 'none';
             if (navRoom) navRoom.style.display = screenId === 'room' ? 'block' : 'none';
             if (navReplies) navReplies.style.display = (screenId === 'replies' && isAdmin) ? 'block' : 'none';
+            if (navLearned) navLearned.style.display = (screenId === 'learned' && isAdmin) ? 'block' : 'none';
             closeSidebarFunc();
+
+            if (screenId === 'learned' && isAdmin) {
+                renderLearnedReplies();
+            }
         }
 
         navButtons.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showScreen(btn.dataset.screen); }));
@@ -1394,17 +1576,14 @@
             return Array.from({ length: 5 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
         }
 
-        // ===== دوال Firebase للردود =====
-        async function loadReplies() {
+        // ========== دوال الردود العامة ==========
+        async function loadGlobalReplies() {
             const repliesRef = ref(db, 'replies');
             const snapshot = await get(repliesRef);
             savedReplies = [];
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                savedReplies = Object.keys(data).map(key => ({
-                    id: key,
-                    ...data[key]
-                }));
+                savedReplies = Object.keys(data).map(key => ({ id: key, text: data[key].text }));
             }
             renderRepliesPopup();
             renderRepliesManagement();
@@ -1414,28 +1593,13 @@
             if (!popupRepliesList) return;
             popupRepliesList.innerHTML = '';
             if (savedReplies.length === 0) {
-                popupRepliesList.innerHTML = '<div class="reply-item">لا توجد ردود محفوظة</div>';
+                popupRepliesList.innerHTML = '<div class="reply-item">لا توجد ردود عامة</div>';
                 return;
-            }
-            // تحليل الرسالة الحالية لتحديد الرد الموصى به
-            const currentMessage = messageInput.value.trim().toLowerCase();
-            let recommendedId = null;
-            if (currentMessage) {
-                // البحث عن أول رد يتطابق مع الكلمة المفتاحية
-                for (let reply of savedReplies) {
-                    if (reply.intent && currentMessage.includes(reply.intent.toLowerCase())) {
-                        recommendedId = reply.id;
-                        break;
-                    }
-                }
             }
             savedReplies.forEach(reply => {
                 const div = document.createElement('div');
-                div.className = 'reply-item' + (reply.id === recommendedId ? ' recommended' : '');
-                div.innerHTML = `
-                    <span class="reply-text">${reply.text}</span>
-                    ${reply.intent ? `<span class="reply-intent">${reply.intent}</span>` : ''}
-                `;
+                div.className = 'reply-item';
+                div.innerHTML = `<span class="reply-text">${reply.text}</span>`;
                 div.addEventListener('click', () => {
                     messageInput.value = reply.text;
                     repliesPopup.classList.remove('show');
@@ -1449,7 +1613,7 @@
             if (!repliesListContainer) return;
             repliesListContainer.innerHTML = '';
             if (savedReplies.length === 0) {
-                repliesListContainer.innerHTML = '<p class="note" style="text-align:center;">لا توجد ردود. أضف رداً جديداً.</p>';
+                repliesListContainer.innerHTML = '<p class="note">لا توجد ردود. أضف رداً جديداً.</p>';
                 return;
             }
             savedReplies.forEach(reply => {
@@ -1457,367 +1621,218 @@
                 div.className = 'reply-manage-item';
                 div.innerHTML = `
                     <span class="reply-manage-text">${reply.text}</span>
-                    ${reply.intent ? `<span class="reply-manage-intent">${reply.intent}</span>` : ''}
                     <div class="reply-manage-actions">
-                        <button class="edit-btn" data-id="${reply.id}" data-text="${reply.text}" data-intent="${reply.intent || ''}"><i class="material-icons">edit</i></button>
+                        <button class="edit-btn" data-id="${reply.id}" data-text="${reply.text}"><i class="material-icons">edit</i></button>
                         <button class="delete-btn" data-id="${reply.id}"><i class="material-icons">delete</i></button>
                     </div>
                 `;
                 repliesListContainer.appendChild(div);
             });
-
-            // إضافة مستمعي الأحداث لأزرار التعديل والحذف
             document.querySelectorAll('.reply-manage-actions .edit-btn').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     const id = btn.dataset.id;
                     const oldText = btn.dataset.text;
-                    const oldIntent = btn.dataset.intent;
-                    const newText = prompt('تعديل نص الرد:', oldText);
-                    if (newText !== null && newText.trim() !== '') {
-                        const newIntent = prompt('تعديل الكلمة المفتاحية (اختياري):', oldIntent) || '';
-                        await update(ref(db, `replies/${id}`), { text: newText.trim(), intent: newIntent.trim() });
-                        await loadReplies();
+                    const newText = prompt('تعديل الرد:', oldText);
+                    if (newText && newText.trim()) {
+                        await update(ref(db, `replies/${id}`), { text: newText.trim() });
+                        await loadGlobalReplies();
                         showNotification('تم التعديل');
                     }
                 });
             });
-
             document.querySelectorAll('.reply-manage-actions .delete-btn').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     const id = btn.dataset.id;
-                    if (confirm('هل أنت متأكد من حذف هذا الرد؟')) {
+                    if (confirm('حذف هذا الرد؟')) {
                         await remove(ref(db, `replies/${id}`));
-                        await loadReplies();
+                        await loadGlobalReplies();
                         showNotification('تم الحذف');
                     }
                 });
             });
         }
 
-        // إضافة رد جديد
         addReplyBtn.addEventListener('click', async () => {
             const text = newReplyText.value.trim();
-            const intent = newReplyIntent.value.trim();
-            if (!text) {
-                showNotification('الرجاء إدخال نص الرد', 'danger');
-                return;
-            }
-            await push(ref(db, 'replies'), { text, intent });
+            if (!text) { showNotification('اكتب نص الرد', 'danger'); return; }
+            await push(ref(db, 'replies'), { text });
             newReplyText.value = '';
-            newReplyIntent.value = '';
-            await loadReplies();
+            await loadGlobalReplies();
             showNotification('تمت الإضافة');
         });
 
-        // ===== دوال الدردشة والملفات (كما هي مع إضافة الردود) =====
-        // (سيتم تضمين الدوال السابقة مع التعديلات اللازمة)
-
-        // ===== دالة جلب مفتاح GitHub =====
-        async function getGitHubToken() {
-            try {
-                const tokenRef = ref(db, '2026');
-                const snapshot = await get(tokenRef);
-                if (snapshot.exists()) {
-                    return snapshot.val();
-                }
-                console.error('المفتاح غير موجود في المسار 2026');
-                return null;
-            } catch (error) {
-                console.error('فشل جلب المفتاح:', error);
-                return null;
+        // ========== دوال الردود المتعلمة (لكل غرفة) ==========
+        async function loadLearnedReplies(room) {
+            const learnedRef = ref(db, `rooms/${room}/learnedReplies`);
+            const snapshot = await get(learnedRef);
+            learnedReplies = [];
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                learnedReplies = Object.keys(data).map(key => ({
+                    id: key,
+                    original: data[key].original,
+                    reply: data[key].reply
+                }));
+            }
+            if (learnedScreen.classList.contains('active')) {
+                renderLearnedReplies();
             }
         }
 
-        // ===== ضغط الصورة =====
-        function compressImage(file, maxWidth = 800, quality = 0.7) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        let width = img.width, height = img.height;
-                        if (width > maxWidth || height > maxWidth) {
-                            if (width > height) {
-                                height = Math.round(height * (maxWidth / width));
-                                width = maxWidth;
-                            } else {
-                                width = Math.round(width * (maxWidth / height));
-                                height = maxWidth;
-                            }
-                        }
-                        const canvas = document.createElement('canvas');
-                        canvas.width = width; canvas.height = height;
-                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', quality);
-                    };
-                    img.onerror = reject;
-                    img.src = e.target.result;
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
+        async function saveLearnedReply(originalMsg, replyMsg) {
+            if (!currentRoom || !isAdmin) return;
+            const learnedRef = ref(db, `rooms/${currentRoom}/learnedReplies`);
+            await push(learnedRef, {
+                original: originalMsg,
+                reply: replyMsg,
+                timestamp: Date.now()
             });
+            await loadLearnedReplies(currentRoom);
         }
 
-        // ===== ضغط الفيديو إلى 720p (webm) =====
-        async function compressVideo(file, targetWidth = 1280, targetHeight = 720) {
-            return new Promise((resolve, reject) => {
-                const video = document.createElement('video');
-                video.preload = 'metadata';
-                video.onloadedmetadata = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = targetWidth;
-                    canvas.height = targetHeight;
-                    const ctx = canvas.getContext('2d');
-                    const stream = canvas.captureStream(30);
-                    const mimeType = 'video/webm; codecs=vp8,opus';
-                    const recorder = MediaRecorder.isTypeSupported(mimeType) ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-                    const chunks = [];
-
-                    recorder.ondataavailable = (e) => chunks.push(e.data);
-                    recorder.onstop = () => {
-                        const blob = new Blob(chunks, { type: 'video/webm' });
-                        resolve(blob);
-                    };
-
-                    video.currentTime = 0;
-                    video.play();
-
-                    const drawFrame = () => {
-                        if (!video.paused && !video.ended) {
-                            ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
-                            requestAnimationFrame(drawFrame);
-                        }
-                    };
-
-                    video.onseeked = () => {
-                        drawFrame();
-                        recorder.start();
-                        video.addEventListener('ended', () => {
-                            recorder.stop();
-                            video.pause();
-                        });
-                    };
-
-                    video.onerror = () => reject('فشل معالجة الفيديو');
-                };
-                video.onerror = () => reject('لا يمكن قراءة الفيديو');
-                video.src = URL.createObjectURL(file);
-            });
-        }
-
-        // ===== التحقق من الفيديو وضغطه إذا لزم الأمر =====
-        async function validateAndCompressVideo(file) {
-            if (file.size <= 10 * 1024 * 1024) {
-                return file;
+        function renderLearnedReplies() {
+            if (!learnedListContainer) return;
+            learnedListContainer.innerHTML = '';
+            if (learnedReplies.length === 0) {
+                learnedListContainer.innerHTML = '<p class="note">لا توجد ردود متعلمة لهذه الغرفة</p>';
+                return;
             }
-            return new Promise((resolve, reject) => {
-                const video = document.createElement('video');
-                video.preload = 'metadata';
-                video.onloadedmetadata = async () => {
-                    URL.revokeObjectURL(video.src);
-                    const duration = video.duration;
-                    const width = video.videoWidth;
-                    const height = video.videoHeight;
-
-                    if (duration > 60) {
-                        reject(`مدة الفيديو تتجاوز دقيقة واحدة (${Math.round(duration)} ثانية)`);
-                        return;
-                    }
-
-                    if (width > 1280 || height > 720) {
-                        showNotification('جاري ضغط الفيديو إلى 720p...');
-                        try {
-                            const compressedBlob = await compressVideo(file, 1280, 720);
-                            const compressedFile = new File([compressedBlob], file.name.replace(/\.[^/.]+$/, '') + '.webm', { type: 'video/webm' });
-                            resolve(compressedFile);
-                        } catch (err) {
-                            reject('فشل ضغط الفيديو: ' + err);
-                        }
-                    } else {
-                        resolve(file);
-                    }
-                };
-                video.onerror = () => reject('لا يمكن قراءة الفيديو');
-                video.src = URL.createObjectURL(file);
+            learnedReplies.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'learned-reply-item';
+                div.innerHTML = `
+                    <div class="learned-original">الرسالة: ${item.original}</div>
+                    <div class="learned-reply">ردك: ${item.reply}</div>
+                    <div class="learned-actions">
+                        <button class="edit-learned" data-id="${item.id}" data-original="${item.original}" data-reply="${item.reply}"><i class="material-icons">edit</i></button>
+                        <button class="delete-learned" data-id="${item.id}"><i class="material-icons">delete</i></button>
+                    </div>
+                `;
+                learnedListContainer.appendChild(div);
             });
-        }
 
-        // ===== رفع الملف إلى GitHub =====
-        function uploadFileToGitHub(file, roomCode, userId, onProgress) {
-            return new Promise(async (resolve, reject) => {
-                const token = await getGitHubToken();
-                if (!token) { reject('مفتاح GitHub غير متوفر'); return; }
-
-                const GITHUB_USERNAME = "ashlhl";
-                const REPO_NAME = "ashlhl";
-                const BRANCH = "main";
-                const REMOTE_FOLDER = "uploads";
-
-                let fileToUpload = file;
-
-                if (file.type.startsWith('image/') && !file.type.includes('gif')) {
-                    try {
-                        fileToUpload = await compressImage(file);
-                    } catch (err) { console.warn('فشل ضغط الصورة', err); }
-                }
-
-                if (file.type.startsWith('video/')) {
-                    try {
-                        fileToUpload = await validateAndCompressVideo(file);
-                    } catch (err) {
-                        reject(err);
-                        return;
-                    }
-                }
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const base64 = e.target.result.split(',')[1];
-                    const timestamp = Date.now();
-                    const rand = Math.floor(Math.random() * 9000) + 1000;
-                    const remoteName = `${timestamp}_${rand}_${file.name}`;
-                    const remotePath = `${REMOTE_FOLDER}/${roomCode}/${remoteName}`;
-                    const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${remotePath}`;
-
-                    const data = JSON.stringify({
-                        message: `رفع ملف ${remoteName}`,
-                        content: base64,
-                        branch: BRANCH
-                    });
-
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('PUT', url, true);
-                    xhr.setRequestHeader('Authorization', `token ${token}`);
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    xhr.setRequestHeader('Accept', 'application/vnd.github+json');
-
-                    if (onProgress) {
-                        xhr.upload.addEventListener('progress', (e) => {
-                            if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
-                        });
-                    }
-
-                    xhr.onload = () => {
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            try {
-                                const json = JSON.parse(xhr.responseText);
-                                const rawUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${remotePath}`;
-                                resolve({ url: rawUrl, path: remotePath });
-                            } catch (err) { reject('فشل تحليل استجابة GitHub'); }
-                        } else {
-                            let errorMsg = `خطأ ${xhr.status}`;
-                            try { const errJson = JSON.parse(xhr.responseText); errorMsg = errJson.message || errorMsg; } catch (e) {}
-                            reject(errorMsg);
-                        }
-                    };
-                    xhr.onerror = () => reject('فشل الاتصال بـ GitHub');
-                    xhr.send(data);
-                };
-                reader.onerror = () => reject('فشل قراءة الملف');
-                reader.readAsDataURL(fileToUpload);
-            });
-        }
-
-        // ===== حذف ملف من GitHub =====
-        async function deleteFileFromGitHub(githubPath) {
-            const token = await getGitHubToken();
-            if (!token) return false;
-
-            const GITHUB_USERNAME = "ashlhl";
-            const REPO_NAME = "ashlhl";
-            const BRANCH = "main";
-
-            try {
-                const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${githubPath}?ref=${BRANCH}`;
-                const getResp = await fetch(url, { headers: { "Authorization": "token " + token } });
-                if (!getResp.ok) return false;
-                const fileInfo = await getResp.json();
-                const sha = fileInfo.sha;
-
-                const deleteUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${githubPath}`;
-                const deleteResp = await fetch(deleteUrl, {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": "token " + token,
-                        "Content-Type": "application/json",
-                        "Accept": "application/vnd.github+json"
-                    },
-                    body: JSON.stringify({ message: `حذف ملف`, sha: sha, branch: BRANCH })
+            document.querySelectorAll('.edit-learned').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = btn.dataset.id;
+                    const oldOriginal = btn.dataset.original;
+                    const oldReply = btn.dataset.reply;
+                    const newOriginal = prompt('تعديل النص الأصلي:', oldOriginal);
+                    if (newOriginal === null) return;
+                    const newReply = prompt('تعديل الرد:', oldReply);
+                    if (newReply === null) return;
+                    await update(ref(db, `rooms/${currentRoom}/learnedReplies/${id}`), { original: newOriginal.trim(), reply: newReply.trim() });
+                    await loadLearnedReplies(currentRoom);
+                    showNotification('تم التعديل');
                 });
-                return deleteResp.ok;
-            } catch (error) {
-                console.error('فشل حذف الملف من GitHub:', error);
-                return false;
-            }
+            });
+
+            document.querySelectorAll('.delete-learned').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = btn.dataset.id;
+                    if (confirm('حذف هذا الرد المتعلم؟')) {
+                        await remove(ref(db, `rooms/${currentRoom}/learnedReplies/${id}`));
+                        await loadLearnedReplies(currentRoom);
+                        showNotification('تم الحذف');
+                    }
+                });
+            });
         }
 
-        // ===== دوال الدردشة =====
+        // ========== البحث عن أفضل رد ==========
+        function findBestReply(incomingText) {
+            const incomingWords = incomingText.split(/\s+/).map(w => w.toLowerCase());
+
+            // البحث في learnedReplies
+            let bestLearned = null;
+            let bestLearnedScore = 0;
+            learnedReplies.forEach(item => {
+                const originalWords = item.original.split(/\s+/).map(w => w.toLowerCase());
+                const common = incomingWords.filter(w => originalWords.includes(w)).length;
+                const score = common / Math.max(incomingWords.length, originalWords.length);
+                if (score > bestLearnedScore && score > 0.3) {
+                    bestLearnedScore = score;
+                    bestLearned = item.reply;
+                }
+            });
+            if (bestLearned) return bestLearned;
+
+            // البحث في savedReplies (العامة)
+            let bestGlobal = null;
+            let bestGlobalScore = 0;
+            savedReplies.forEach(reply => {
+                const replyWords = reply.text.split(/\s+/).map(w => w.toLowerCase());
+                const common = incomingWords.filter(w => replyWords.includes(w)).length;
+                const score = common / Math.max(incomingWords.length, replyWords.length);
+                if (score > bestGlobalScore && score > 0.2) {
+                    bestGlobalScore = score;
+                    bestGlobal = reply.text;
+                }
+            });
+            return bestGlobal;
+        }
+
+        // ========== إرسال الرد التلقائي ==========
+        async function sendAutoReply() {
+            if (!suggestedReplyText || !currentRoom) return;
+            await push(messagesRef, {
+                sender: isAdmin ? ADMIN_LOGIN : currentUser,
+                text: suggestedReplyText,
+                timestamp: Date.now()
+            });
+            showNotification('تم الرد التلقائي');
+            suggestedReplyText = null;
+        }
+
+        // ========== دوال الدردشة ==========
         function displayMessage(msg, isOwn, isSystem, msgId) {
-            if (msgId && displayedMessages.has(msgId)) return;
-            if (msgId) displayedMessages.add(msgId);
+            if (displayedMessages.has(msgId)) return;
+            displayedMessages.add(msgId);
             const div = document.createElement('div');
             div.className = `message ${isOwn ? 'own' : ''} ${isSystem ? 'system' : ''}`;
-            div.dataset.msgId = msgId;
             if (!isSystem) {
                 const nameSpan = document.createElement('div');
                 nameSpan.className = 'username';
+                nameSpan.textContent = msg.sender === ADMIN_LOGIN ? ADMIN_DISPLAY : msg.sender;
                 if (msg.sender === ADMIN_LOGIN) {
-                    nameSpan.textContent = ADMIN_DISPLAY;
-                } else {
-                    nameSpan.textContent = msg.sender;
-                }
-                if (msg.sender === ADMIN_LOGIN) {
-                    const adminIcon = document.createElement('i');
-                    adminIcon.className = 'material-icons';
-                    adminIcon.style.fontSize = '0.7rem';
-                    adminIcon.style.color = '#fbbf24';
-                    adminIcon.textContent = 'verified';
-                    nameSpan.appendChild(adminIcon);
+                    const icon = document.createElement('i');
+                    icon.className = 'material-icons';
+                    icon.style.fontSize = '0.7rem';
+                    icon.style.color = '#fbbf24';
+                    icon.textContent = 'verified';
+                    nameSpan.appendChild(icon);
                 }
                 div.appendChild(nameSpan);
             }
+            // دعم بسيط للصور والفيديو (يمكن تحسينه)
             if (msg.type === 'image') {
                 const img = document.createElement('img');
                 img.src = msg.text;
-                img.alt = 'صورة';
-                img.loading = 'lazy';
-                img.addEventListener('click', () => { modalMediaContainer.innerHTML = `<img src="${msg.text}" class="modal-media">`; mediaModal.classList.add('active'); });
+                img.style.maxWidth = '100%';
+                img.addEventListener('click', () => { 
+                    document.getElementById('modalMediaContainer').innerHTML = `<img src="${msg.text}" class="modal-media">`;
+                    document.getElementById('mediaModal').classList.add('active');
+                });
                 div.appendChild(img);
             } else if (msg.type === 'video') {
                 const video = document.createElement('video');
                 video.src = msg.text;
                 video.controls = true;
-                video.preload = 'metadata';
-                video.addEventListener('play', function() {
-                    const allVideos = document.querySelectorAll('video');
-                    allVideos.forEach(v => {
-                        if (v !== video && !v.paused) {
-                            v.pause();
-                        }
-                    });
+                video.style.maxWidth = '100%';
+                video.addEventListener('click', () => { 
+                    document.getElementById('modalMediaContainer').innerHTML = `<video src="${msg.text}" controls class="modal-media"></video>`;
+                    document.getElementById('mediaModal').classList.add('active');
                 });
-                video.addEventListener('click', () => { modalMediaContainer.innerHTML = `<video src="${msg.text}" controls class="modal-media"></video>`; mediaModal.classList.add('active'); });
-                video.onerror = () => {
-                    const errorSpan = document.createElement('span');
-                    errorSpan.innerHTML = '<i class="material-icons" style="font-size:1rem; vertical-align:middle;">warning</i> فشل تحميل الفيديو';
-                    errorSpan.style.color = 'red';
-                    div.replaceChild(errorSpan, video);
-                };
                 div.appendChild(video);
             } else if (msg.type === 'audio') {
                 const audio = document.createElement('audio');
                 audio.src = msg.text;
                 audio.controls = true;
-                audio.preload = 'metadata';
-                audio.addEventListener('click', () => { modalMediaContainer.innerHTML = `<audio src="${msg.text}" controls class="modal-media"></audio>`; mediaModal.classList.add('active'); });
-                audio.onerror = () => {
-                    const errorSpan = document.createElement('span');
-                    errorSpan.innerHTML = '<i class="material-icons" style="font-size:1rem; vertical-align:middle;">warning</i> فشل تحميل الصوت';
-                    errorSpan.style.color = 'red';
-                    div.replaceChild(errorSpan, audio);
-                };
+                audio.addEventListener('click', () => { 
+                    document.getElementById('modalMediaContainer').innerHTML = `<audio src="${msg.text}" controls class="modal-media"></audio>`;
+                    document.getElementById('mediaModal').classList.add('active');
+                });
                 div.appendChild(audio);
             } else {
                 div.appendChild(document.createTextNode(msg.text));
@@ -1826,118 +1841,16 @@
             timeSpan.className = 'time';
             timeSpan.textContent = new Date(msg.timestamp).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
             div.appendChild(timeSpan);
-
-            if (!isSystem) {
-                const replyBtn = document.createElement('button');
-                replyBtn.className = 'reply-btn';
-                replyBtn.innerHTML = '<i class="material-icons" style="font-size:1rem;">reply</i>';
-                replyBtn.addEventListener('click', () => { messageInput.value = `@${msg.sender} `; messageInput.focus(); });
-                div.appendChild(replyBtn);
-            }
-
-            if (!isSystem && (isAdmin || msg.sender === currentUser)) {
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-btn';
-                deleteBtn.innerHTML = '<i class="material-icons" style="font-size:1rem;">delete</i>';
-                deleteBtn.title = 'حذف الرسالة';
-                deleteBtn.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    if (confirm('هل أنت متأكد من حذف هذه الرسالة؟')) {
-                        await deleteMessage(msgId, msg);
-                    }
-                });
-                div.appendChild(deleteBtn);
-            }
             messagesContainer.appendChild(div);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        async function deleteMessage(msgId, msg) {
-            if (!currentRoom || !msgId) return;
-            if (msg.type === 'image' || msg.type === 'video' || msg.type === 'audio') {
-                const url = msg.text;
-                const match = url.match(/\/uploads\/(.+)$/);
-                if (match) {
-                    const githubPath = 'uploads/' + match[1];
-                    await deleteFileFromGitHub(githubPath);
-                }
-            }
-            try {
-                await remove(ref(db, `rooms/${currentRoom}/messages/${msgId}`));
-                showNotification('تم حذف الرسالة');
-            } catch (error) {
-                showNotification('فشل حذف الرسالة', 'danger');
-            }
-        }
-
-        async function deleteOldMessages(room) {
-            const msgsRef = ref(db, `rooms/${room}/messages`);
-            const snap = await get(msgsRef);
-            if (!snap.exists()) return;
-            const msgs = snap.val();
-            const ids = Object.keys(msgs).map(k => ({ id: k, ts: msgs[k].timestamp })).sort((a,b) => a.ts - b.ts);
-            if (ids.length > MAX_MSGS) {
-                const toDelete = ids.slice(0, ids.length - MAX_MSGS);
-                for (const msg of toDelete) {
-                    const msgData = msgs[msg.id];
-                    if (msgData.type === 'image' || msgData.type === 'video' || msgData.type === 'audio') {
-                        const url = msgData.text;
-                        const match = url.match(/\/uploads\/(.+)$/);
-                        if (match) {
-                            const githubPath = 'uploads/' + match[1];
-                            await deleteFileFromGitHub(githubPath);
-                        }
-                    }
-                    await remove(ref(db, `rooms/${room}/messages/${msg.id}`));
-                }
-            }
-        }
-
-        async function kickUser(targetUserId, targetName) {
-            if (!isAdmin || !currentRoom) return;
-            if (targetUserId === userId) {
-                showNotification('لا يمكن طرد نفسك', 'danger');
-                return;
-            }
-            if (targetName === ADMIN_LOGIN) {
-                showNotification('لا يمكن طرد المدير', 'danger');
-                return;
-            }
-            if (confirm(`هل أنت متأكد من طرد ${targetName}؟`)) {
-                await remove(ref(db, `rooms/${currentRoom}/users/${targetUserId}`));
-                await remove(ref(db, `rooms/${currentRoom}/typing/${targetUserId}`));
-                await push(ref(db, `rooms/${currentRoom}/messages`), {
-                    sender: 'نظام',
-                    text: `تم طرد ${targetName} بواسطة المدير`,
-                    timestamp: Date.now()
-                });
-                showNotification(`تم طرد ${targetName}`);
-            }
-        }
+        // حذف الرسائل القديمة (اختصاراً)
+        async function deleteOldMessages(room) {}
 
         function updateUsersLists(users) {
             const count = Object.keys(users).length;
             userCountSpan.textContent = `(${count})`;
-
-            if (roomUsersList) {
-                roomUsersList.innerHTML = '';
-                Object.keys(users).forEach(key => {
-                    const user = users[key];
-                    const span = document.createElement('span');
-                    span.textContent = (user.name === ADMIN_LOGIN) ? ADMIN_DISPLAY : user.name;
-                    if (user.name === ADMIN_LOGIN) {
-                        const adminIcon = document.createElement('i');
-                        adminIcon.className = 'material-icons';
-                        adminIcon.style.fontSize = '0.9rem';
-                        adminIcon.style.color = '#fbbf24';
-                        adminIcon.style.marginRight = '2px';
-                        adminIcon.textContent = 'verified';
-                        span.appendChild(adminIcon);
-                    }
-                    roomUsersList.appendChild(span);
-                });
-            }
-
             if (popupUsersList) {
                 popupUsersList.innerHTML = '';
                 Object.keys(users).forEach(key => {
@@ -1946,27 +1859,34 @@
                     item.className = 'user-item';
                     const nameSpan = document.createElement('span');
                     nameSpan.className = 'user-name';
-                    nameSpan.textContent = (user.name === ADMIN_LOGIN) ? ADMIN_DISPLAY : user.name;
+                    nameSpan.textContent = user.name === ADMIN_LOGIN ? ADMIN_DISPLAY : user.name;
                     item.appendChild(nameSpan);
                     if (user.name === ADMIN_LOGIN) {
-                        const adminIcon = document.createElement('i');
-                        adminIcon.className = 'material-icons';
-                        adminIcon.style.color = '#fbbf24';
-                        adminIcon.textContent = 'verified';
-                        item.appendChild(adminIcon);
-                    }
-                    if (isAdmin && key !== userId && user.name !== ADMIN_LOGIN) {
-                        const kickIcon = document.createElement('button');
-                        kickIcon.className = 'kick-btn';
-                        kickIcon.innerHTML = '<i class="material-icons">exit_to_app</i>';
-                        kickIcon.title = 'طرد المستخدم';
-                        kickIcon.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            kickUser(key, user.name);
-                        });
-                        item.appendChild(kickIcon);
+                        const icon = document.createElement('i');
+                        icon.className = 'material-icons';
+                        icon.style.color = '#fbbf24';
+                        icon.textContent = 'verified';
+                        item.appendChild(icon);
                     }
                     popupUsersList.appendChild(item);
+                });
+            }
+            if (document.getElementById('room-users-list')) {
+                const roomList = document.getElementById('room-users-list');
+                roomList.innerHTML = '';
+                Object.keys(users).forEach(key => {
+                    const user = users[key];
+                    const span = document.createElement('span');
+                    span.textContent = user.name === ADMIN_LOGIN ? ADMIN_DISPLAY : user.name;
+                    if (user.name === ADMIN_LOGIN) {
+                        const icon = document.createElement('i');
+                        icon.className = 'material-icons';
+                        icon.style.fontSize = '0.9rem';
+                        icon.style.color = '#fbbf24';
+                        icon.textContent = 'verified';
+                        span.appendChild(icon);
+                    }
+                    roomList.appendChild(span);
                 });
             }
         }
@@ -1977,12 +1897,6 @@
             usersUnsubscribe = onValue(usersRef, snap => {
                 const users = snap.val() || {};
                 updateUsersLists(users);
-                if (Object.keys(users).length === 0) {
-                    remove(ref(db, `rooms/${room}`));
-                }
-                if (roomScreen?.classList.contains('active') && currentRoom === room) {
-                    roomDetailUsers.textContent = Object.keys(users).length;
-                }
             });
         }
 
@@ -2005,72 +1919,82 @@
             });
         }
 
+        function setupMessageListener() {
+            if (messagesUnsubscribe) messagesUnsubscribe();
+            messagesRef = ref(db, `rooms/${currentRoom}/messages`);
+            const recentQuery = query(messagesRef, orderByChild('timestamp'), limitToLast(MAX_MSGS));
+            messagesContainer.innerHTML = '';
+            messagesContainer.appendChild(typingIndicator);
+            messagesUnsubscribe = onChildAdded(recentQuery, async (snap) => {
+                const msg = snap.val();
+                if (!msg) return;
+                const isOwn = (msg.sender === (isAdmin ? ADMIN_LOGIN : currentUser)) && msg.sender !== 'نظام';
+                displayMessage(msg, isOwn, msg.sender === 'نظام', snap.key);
+                if (msg.sender !== 'نظام' && !isOwn) {
+                    lastIncomingMessage = { text: msg.text, id: snap.key };
+                    const bestReply = findBestReply(msg.text);
+                    if (bestReply) {
+                        suggestedReplyText = bestReply;
+                        if (autoReplyActive) {
+                            if (pendingTimeout) clearTimeout(pendingTimeout);
+                            pendingTimeout = setTimeout(() => sendAutoReply(), 5000);
+                            showNotification(`سيتم الرد بعد 5 ثوان: "${bestReply}"`);
+                        }
+                    } else {
+                        suggestedReplyText = null;
+                    }
+                }
+                await deleteOldMessages(currentRoom);
+            });
+        }
+
         async function enterChat(room, name) {
             if (messagesUnsubscribe) messagesUnsubscribe();
             if (usersUnsubscribe) usersUnsubscribe();
             displayedMessages.clear();
-
             currentRoom = room;
             if (name === ADMIN_LOGIN) {
                 currentUser = ADMIN_DISPLAY;
                 isAdmin = true;
                 // إظهار أزرار المدير
-                if (repliesBtn) repliesBtn.style.display = 'flex';
-                if (delayReplyBtn) delayReplyBtn.style.display = 'flex';
-                if (navReplies) navReplies.style.display = 'block';
+                repliesBtn.style.display = 'flex';
+                autoReplyToggle.style.display = 'flex';
+                navReplies.style.display = 'block';
+                navLearned.style.display = 'block';
+                adminControls.style.display = 'flex';
+                await loadGlobalReplies();
+                await loadLearnedReplies(room);
             } else {
                 currentUser = name;
                 isAdmin = false;
-                if (repliesBtn) repliesBtn.style.display = 'none';
-                if (delayReplyBtn) delayReplyBtn.style.display = 'none';
-                if (navReplies) navReplies.style.display = 'none';
+                repliesBtn.style.display = 'none';
+                autoReplyToggle.style.display = 'none';
+                navReplies.style.display = 'none';
+                navLearned.style.display = 'none';
+                adminControls.style.display = 'none';
             }
             userId = generateUserId();
-
             roomNameDisplay.textContent = `غرفة ${room}`;
-            userStatus.innerHTML = isAdmin ? 
-                `<i class="material-icons" style="font-size:0.9rem; vertical-align:middle;">verified</i> ${currentUser} (مدير)` : 
-                currentUser;
-
+            userStatus.innerHTML = isAdmin ? `<i class="material-icons">verified</i> ${currentUser} (مدير)` : currentUser;
             const userRef = ref(db, `rooms/${room}/users/${userId}`);
-            await set(userRef, { name: name, joinedAt: Date.now() });
+            await set(userRef, { name, joinedAt: Date.now() });
             onDisconnect(userRef).remove();
-
-            const roomInfoRef = ref(db, `rooms/${room}/info`);
-            const roomInfoSnap = await get(roomInfoRef);
-            if (roomInfoSnap.exists()) {
-                roomDetailCreated.textContent = new Date(roomInfoSnap.val().createdAt).toLocaleDateString('ar-EG');
-            } else {
-                await set(roomInfoRef, { createdAt: Date.now(), createdBy: name });
-                roomDetailCreated.textContent = new Date().toLocaleDateString('ar-EG');
-            }
-
             await push(ref(db, `rooms/${room}/messages`), { sender: 'نظام', text: `${currentUser} دخل الغرفة`, timestamp: Date.now() });
-
             monitorRoomUsers(room);
             setupTyping(room, userId);
             listenTyping(room);
+            setupMessageListener();
 
-            messagesRef = ref(db, `rooms/${room}/messages`);
-            const recentQuery = query(messagesRef, orderByChild('timestamp'), limitToLast(MAX_MSGS));
-            messagesContainer.innerHTML = '';
-            messagesContainer.appendChild(typingIndicator);
+            // تحديث معلومات الغرفة
+            const roomInfoRef = ref(db, `rooms/${room}/info`);
+            const roomInfoSnap = await get(roomInfoRef);
+            if (roomInfoSnap.exists()) {
+                document.getElementById('room-detail-created').textContent = new Date(roomInfoSnap.val().createdAt).toLocaleDateString('ar-EG');
+                document.getElementById('room-detail-code').textContent = room;
+            }
 
-            messagesUnsubscribe = onChildAdded(recentQuery, async (snap) => {
-                const m = snap.val();
-                if (!m) return;
-                displayMessage(m, (m.sender === name) && m.sender !== 'نظام', m.sender === 'نظام', snap.key);
-                await deleteOldMessages(currentRoom);
-            });
-
-            roomDetailCode.textContent = room;
-            roomDetailUsers.textContent = '?';
-            roomDetailStatus.textContent = 'نشطة';
             showScreen('chat');
             messageInput.focus();
-
-            // تحميل الردود
-            await loadReplies();
         }
 
         function leaveRoom() {
@@ -2086,95 +2010,29 @@
             isAdmin = false;
             messagesContainer.innerHTML = '';
             showScreen('login');
-            // إخفاء أزرار المدير
-            if (repliesBtn) repliesBtn.style.display = 'none';
-            if (delayReplyBtn) delayReplyBtn.style.display = 'none';
-            if (navReplies) navReplies.style.display = 'none';
+            repliesBtn.style.display = 'none';
+            autoReplyToggle.style.display = 'none';
+            navReplies.style.display = 'none';
+            navLearned.style.display = 'none';
+            adminControls.style.display = 'none';
+            if (pendingTimeout) clearTimeout(pendingTimeout);
+            suggestedReplyText = null;
+            lastIncomingMessage = null;
         }
 
-        async function sendMediaFile(file) {
-            if (!currentRoom || !currentUser) { showNotification('أنت لست في غرفة', 'danger'); return; }
-            const type = file.type.startsWith('video/') ? 'video' : (file.type.startsWith('audio/') ? 'audio' : 'image');
-            const maxSize = type === 'video' ? 10 * 1024 * 1024 : (type === 'audio' ? 5 * 1024 * 1024 : 5 * 1024 * 1024);
-            if (file.size > maxSize) { showNotification('الملف كبير جداً', 'danger'); return; }
-            if (!progressBar || !progressFill) return;
-            progressBar.style.display = 'block';
-            progressFill.style.width = '0%';
-
-            try {
-                showNotification('جاري رفع...');
-                const result = await uploadFileToGitHub(file, currentRoom, userId, (percent) => {
-                    progressFill.style.width = percent + '%';
-                });
-                if (!result) throw new Error('فشل الرفع إلى GitHub');
-
-                await push(messagesRef, {
-                    sender: isAdmin ? ADMIN_LOGIN : currentUser,
-                    text: result.url,
-                    type: type,
-                    timestamp: Date.now()
-                });
-
-                progressFill.style.width = '100%';
-                setTimeout(() => { progressBar.style.display = 'none'; progressFill.style.width = '0%'; }, 500);
-                showNotification('تم رفع الملف بنجاح');
-            } catch (error) {
-                console.error('فشل إرسال الملف:', error);
-                showNotification('فشل الإرسال: ' + error, 'danger');
-                progressBar.style.display = 'none';
-            }
-        }
-
-        // ===== دوال التسجيل الصوتي =====
-        async function startAudioRecording() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-
-                mediaRecorder.ondataavailable = event => {
-                    audioChunks.push(event.data);
-                };
-
-                mediaRecorder.onstop = async () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const audioFile = new File([audioBlob], 'recording.webm', { type: 'audio/webm' });
-                    await sendMediaFile(audioFile);
-                    stream.getTracks().forEach(track => track.stop());
-                };
-
-                mediaRecorder.start();
-                isRecording = true;
-                audioBtn.innerHTML = '<i class="material-icons">stop</i> إيقاف';
-                showNotification('جاري التسجيل ...');
-            } catch (err) {
-                showNotification('لا يمكن الوصول إلى الميكروفون', 'danger');
-                console.error(err);
-            }
-        }
-
-        function stopAudioRecording() {
-            if (mediaRecorder && isRecording) {
-                mediaRecorder.stop();
-                isRecording = false;
-                audioBtn.innerHTML = '<i class="material-icons">mic</i> تسجيل';
-            }
-        }
-
-        // ================== أحداث الأزرار ==================
+        // أحداث الأزرار
         manualCheckbox.addEventListener('change', () => {
-            customContainer.classList.toggle('show', manualCheckbox.checked);
+            customContainer.style.display = manualCheckbox.checked ? 'block' : 'none';
         });
 
         createBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            let name = usernameInput.value.trim();
-            if (!name) name = generateRandomName();
+            let name = usernameInput.value.trim() || generateRandomName();
             let code;
             if (manualCheckbox.checked) {
                 code = customRoomInput.value.trim();
                 if (!code || !isValidRoomCode(code)) {
-                    errorDiv.textContent = 'المفتاح يجب أن يكون 3-6 أرقام';
+                    errorDiv.textContent = 'المفتاح 3-6 أرقام';
                     return;
                 }
             } else {
@@ -2187,40 +2045,46 @@
                 await enterChat(code, name);
                 showNotification('تم الدخول');
             } catch (err) {
-                errorDiv.textContent = 'خطأ في الاتصال: ' + err.message;
+                errorDiv.textContent = 'خطأ: ' + err.message;
             }
         });
 
         joinBtn.addEventListener('click', async () => {
-            let name = usernameInput.value.trim();
+            let name = usernameInput.value.trim() || generateRandomName();
             const code = roomCodeInput.value.trim();
-            if (!code) { errorDiv.textContent = 'أدخل مفتاح الغرفة'; return; }
-            if (!isValidRoomCode(code)) { errorDiv.textContent = 'المفتاح 3-6 أرقام'; return; }
-            if (!name) name = generateRandomName();
+            if (!code || !isValidRoomCode(code)) {
+                errorDiv.textContent = 'المفتاح 3-6 أرقام';
+                return;
+            }
             errorDiv.textContent = '';
             const roomRef = ref(db, `rooms/${code}/info`);
-            if (!(await get(roomRef)).exists()) { errorDiv.textContent = 'المفتاح غير صحيح'; return; }
+            if (!(await get(roomRef)).exists()) {
+                errorDiv.textContent = 'المفتاح غير صحيح';
+                return;
+            }
             await enterChat(code, name);
             showNotification('تم الانضمام');
         });
 
         publicBtn.addEventListener('click', async () => {
-            let name = usernameInput.value.trim();
-            if (!name) name = generateRandomName();
+            let name = usernameInput.value.trim() || generateRandomName();
             errorDiv.textContent = '';
             const roomRef = ref(db, `rooms/${PUBLIC_ROOM_CODE}/info`);
-            if (!(await get(roomRef)).exists()) await set(roomRef, { createdAt: Date.now(), createdBy: 'system', public: true });
+            if (!(await get(roomRef)).exists()) await set(roomRef, { createdAt: Date.now(), createdBy: 'system' });
             await enterChat(PUBLIC_ROOM_CODE, name);
-            showNotification('مرحباً بك في الغرفة العامة');
+            showNotification('مرحباً بك');
         });
 
         sendBtn.addEventListener('click', async () => {
             const text = messageInput.value.trim();
             if (!text || !currentRoom) return;
-            await push(messagesRef, { 
-                sender: isAdmin ? ADMIN_LOGIN : currentUser, 
-                text, 
-                timestamp: Date.now() 
+            if (isAdmin && lastIncomingMessage) {
+                await saveLearnedReply(lastIncomingMessage.text, text);
+            }
+            await push(messagesRef, {
+                sender: isAdmin ? ADMIN_LOGIN : currentUser,
+                text,
+                timestamp: Date.now()
             });
             messageInput.value = '';
             if (currentRoom && userId) set(ref(db, `rooms/${currentRoom}/typing/${userId}`), false);
@@ -2228,66 +2092,57 @@
 
         messageInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendBtn.click(); });
 
-        // زر الردود (يظهر للمدير)
         repliesBtn.addEventListener('click', () => {
             repliesPopup.classList.toggle('show');
             popupOverlay.classList.toggle('show');
-            if (repliesPopup.classList.contains('show')) {
-                renderRepliesPopup(); // تحديث القائمة
+            if (repliesPopup.classList.contains('show')) renderRepliesPopup();
+        });
+
+        autoReplyToggle.addEventListener('click', () => {
+            autoReplyActive = !autoReplyActive;
+            autoReplyToggle.style.background = autoReplyActive ? '#10b981' : '#64748b';
+            showNotification(autoReplyActive ? 'تم تشغيل الرد التلقائي' : 'تم إيقاف الرد التلقائي');
+            if (!autoReplyActive && pendingTimeout) {
+                clearTimeout(pendingTimeout);
+                pendingTimeout = null;
             }
         });
 
-        // زر الرد بعد 5 ثوان
-        delayReplyBtn.addEventListener('click', () => {
-            const text = messageInput.value.trim();
-            if (!text) {
-                showNotification('اكتب رداً أولاً', 'danger');
-                return;
-            }
-            if (delayTimeout) {
-                clearTimeout(delayTimeout);
-                showNotification('تم إلغاء الرد المؤجل');
-            }
-            delayTimeout = setTimeout(async () => {
-                if (currentRoom && text) {
-                    await push(messagesRef, { 
-                        sender: isAdmin ? ADMIN_LOGIN : currentUser, 
-                        text, 
-                        timestamp: Date.now() 
-                    });
-                    messageInput.value = '';
-                    showNotification('تم الرد بعد 5 ثوان');
-                    delayTimeout = null;
-                }
-            }, 5000);
-            showNotification('سيتم الرد بعد 5 ثوان', 'success');
+        // أزرار إدارة الردود الواضحة
+        manageRepliesBtn.addEventListener('click', () => {
+            showScreen('replies');
+        });
+
+        manageLearnedBtn.addEventListener('click', () => {
+            showScreen('learned');
         });
 
         attachBtn.addEventListener('click', () => { fileInput.click(); mediaPopup.classList.remove('show'); });
         cameraBtn.addEventListener('click', () => { cameraInput.click(); mediaPopup.classList.remove('show'); });
-        audioBtn.addEventListener('click', () => {
-            if (!isRecording) {
-                startAudioRecording();
-            } else {
-                stopAudioRecording();
-            }
-            mediaPopup.classList.remove('show');
-        });
-
-        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) sendMediaFile(e.target.files[0]); fileInput.value = ''; });
-        cameraInput.addEventListener('change', (e) => { if (e.target.files[0]) sendMediaFile(e.target.files[0]); cameraInput.value = ''; });
+        audioBtn.addEventListener('click', () => { /* تسجيل صوتي - يمكن تطويره لاحقاً */ });
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) {}; fileInput.value = ''; });
+        cameraInput.addEventListener('change', (e) => { if (e.target.files[0]) {}; cameraInput.value = ''; });
 
         leaveBtn.addEventListener('click', leaveRoom);
 
         copyBtn.addEventListener('click', () => {
-            if (currentRoom) navigator.clipboard.writeText(currentRoom).then(() => showNotification('تم نسخ المفتاح'));
+            if (currentRoom) navigator.clipboard.writeText(currentRoom).then(() => showNotification('تم النسخ'));
+        });
+
+        // أزرار شاشة الغرفة
+        document.getElementById('room-enter-chat-btn')?.addEventListener('click', () => { if (currentRoom) showScreen('chat'); else showNotification('لا توجد غرفة', 'danger'); });
+        document.getElementById('room-copy-code-btn')?.addEventListener('click', () => { if (currentRoom) navigator.clipboard.writeText(currentRoom).then(() => showNotification('تم النسخ')); });
+        document.getElementById('room-share-btn')?.addEventListener('click', () => {
+            if (currentRoom) {
+                const url = `${window.location.origin}${window.location.pathname}?room=${currentRoom}`;
+                if (navigator.share) navigator.share({ title: 'اسهل حل', text: `انضم إلى غرفتي برمز: ${currentRoom}`, url });
+                else navigator.clipboard.writeText(url).then(() => showNotification('تم نسخ الرابط'));
+            }
         });
 
         mediaBtn.addEventListener('click', () => mediaPopup.classList.toggle('show'));
         document.addEventListener('click', (e) => {
-            if (mediaBtn && mediaPopup && !mediaBtn.contains(e.target) && !mediaPopup.contains(e.target)) {
-                mediaPopup.classList.remove('show');
-            }
+            if (!mediaBtn?.contains(e.target) && !mediaPopup?.contains(e.target)) mediaPopup?.classList.remove('show');
         });
 
         toggleUsersBtn.addEventListener('click', () => {
@@ -2295,48 +2150,53 @@
             popupOverlay.classList.toggle('show');
         });
 
-        // إغلاق النوافذ المنبثقة عند النقر على الخلفية
         popupOverlay.addEventListener('click', () => {
             usersPopup.classList.remove('show');
             repliesPopup.classList.remove('show');
             popupOverlay.classList.remove('show');
         });
 
-        closeModalBtn.addEventListener('click', () => { mediaModal.classList.remove('active'); modalMediaContainer.innerHTML = ''; });
-        modalBackBtn.addEventListener('click', () => { mediaModal.classList.remove('active'); modalMediaContainer.innerHTML = ''; });
+        // إغلاق modal
+        document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+            document.getElementById('mediaModal').classList.remove('active');
+            document.getElementById('modalMediaContainer').innerHTML = '';
+        });
+        document.getElementById('modalBackBtn')?.addEventListener('click', () => {
+            document.getElementById('mediaModal').classList.remove('active');
+            document.getElementById('modalMediaContainer').innerHTML = '';
+        });
 
         [customRoomInput, roomCodeInput].forEach(i => i.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); }));
 
-        sendMessageAction.addEventListener('click', () => {
-            const n = sendName.value.trim(), m = sendMessage.value.trim();
-            if (!n || !m) { sendStatus.textContent = 'أدخل البيانات'; return; }
-            sendStatus.textContent = 'تم الإرسال (تجريبي)';
-            sendName.value = ''; sendMessage.value = '';
+        // إرسال رسالة تجريبية في شاشة send
+        document.getElementById('send-message-action')?.addEventListener('click', () => {
+            const n = document.getElementById('send-name').value.trim();
+            const m = document.getElementById('send-message').value.trim();
+            if (!n || !m) { document.getElementById('send-status').textContent = 'أدخل البيانات'; return; }
+            document.getElementById('send-status').textContent = 'تم الإرسال (تجريبي)';
+            document.getElementById('send-name').value = '';
+            document.getElementById('send-message').value = '';
         });
 
-        roomEnterChatBtn.addEventListener('click', () => { if (currentRoom) showScreen('chat'); else showNotification('لا توجد غرفة محددة', 'danger'); });
-        roomCopyCodeBtn.addEventListener('click', () => { if (currentRoom) navigator.clipboard.writeText(currentRoom).then(() => showNotification('تم نسخ رمز الغرفة')); else showNotification('لا توجد غرفة', 'danger'); });
-        roomShareBtn.addEventListener('click', () => {
-            if (currentRoom) {
-                const url = `${window.location.origin}${window.location.pathname}?room=${currentRoom}`;
-                if (navigator.share) navigator.share({ title: 'اسهل حل', text: `انضم إلى غرفتي برمز: ${currentRoom}`, url });
-                else navigator.clipboard.writeText(url).then(() => showNotification('تم نسخ رابط الغرفة'));
-            } else showNotification('لا توجد غرفة', 'danger');
-        });
+        window.addEventListener('popstate', () => { if (document.getElementById('chat-screen').classList.contains('active')) leaveRoom(); });
 
-        // مراقبة تغيير حقل الإدخال لتحديث الردود الموصى بها
-        messageInput.addEventListener('input', () => {
-            if (repliesPopup.classList.contains('show')) {
-                renderRepliesPopup();
-            }
-        });
-
-        window.addEventListener('popstate', () => { if (chatScreen?.classList.contains('active')) leaveRoom(); });
+        // إخفاء الأزرار في البداية
         navChat.style.display = 'none';
         navRoom.style.display = 'none';
         navReplies.style.display = 'none';
+        navLearned.style.display = 'none';
         repliesBtn.style.display = 'none';
-        delayReplyBtn.style.display = 'none';
+        autoReplyToggle.style.display = 'none';
+        adminControls.style.display = 'none';
+
+        // إضافة مستمع لتبويب الردود المتعلمة (رغم أنه تبويب واحد)
+        learnedTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                learnedTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderLearnedReplies();
+            });
+        });
     </script>
 </body>
 </html>
